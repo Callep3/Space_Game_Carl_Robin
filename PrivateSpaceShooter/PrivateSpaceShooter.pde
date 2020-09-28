@@ -10,6 +10,6 @@ background(0);
 }	
 
 void draw() {
-
+	world.worldCreation();
 	nexus.NexusSpawn();
 }
