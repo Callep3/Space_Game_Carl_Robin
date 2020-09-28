@@ -7,7 +7,6 @@ Enemies[] enemies;
 int enemySize = 20;
 float enemySpeed = 100.0;
 
-//cmon
 
 void setup() {
 world = new World();
