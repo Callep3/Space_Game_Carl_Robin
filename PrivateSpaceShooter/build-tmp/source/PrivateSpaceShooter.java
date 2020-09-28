@@ -16,6 +16,13 @@ public class PrivateSpaceShooter extends PApplet {
 
 World world;
 Nexus nexus;
+Time myTime;
+Player player;
+Enemies myEnemy;
+Enemies[] enemies;
+int enemySize = 20;
+float enemySpeed = 100.0f;
+
 
 
 public void setup() {
@@ -23,17 +30,54 @@ world = new World();
 nexus = new Nexus();
 
 background(0);
-}	
+//Remove Before Pushing
+surface.setLocation(-1923, 4);
+myEnemy = new Enemies(random(-enemySize, width + enemySize), enemySize);
+player = new Player(width / 4, height / 4);
+myTime = new Time();
+}
 
 public void draw() {
+	myTime.DeltaTime();
 	world.worldCreation();
 	nexus.NexusSpawn();
+	player.update();
+	player.draw();
+	myEnemy.update();
+	myEnemy.draw();
 }
 
 
+public class Enemies {
+	PVector direction, position, velocity;
+	int r, g, b;
 
+	public Enemies(float x, float y) {
+		position = new PVector(x, y);
+
+		direction = new PVector(width/2 - position.x, height/2 - position.y).normalize();
+
+		velocity = new PVector(direction.x, direction.y);
+		velocity.x = velocity.x * deltaTime * enemySpeed;
+		velocity.y = velocity.y * deltaTime * enemySpeed;
+
+		r = 255;
+		g = 0;
+		b = 0;
+	}
+
+	public void update() {
+		position.x += velocity.x;
+		position.y += velocity.y;
+	}
+
+	public void draw() {
+		ellipseMode(CENTER);
+		fill(r, g, b);
+		ellipse(position.x, position.y, enemySize, enemySize);
+	}
+}
 boolean up, down, left, right;
-class Input {
 
 	public void keyPressed() {
 		if(key == 'w') {
@@ -49,9 +93,22 @@ class Input {
 			right = true;
 		}
 	}
-	
 
-}
+	public void keyReleased() {
+		if(key == 'w') {
+			up = false;
+		}
+		if(key == 's') {
+			down = false;
+		}
+		if(key == 'a') {
+			left = false;
+		}
+		if(key == 'd') {
+			right = false;
+		}
+	}
+	
 class Nexus {
 
 	public void NexusSpawn() {
@@ -62,15 +119,98 @@ class Nexus {
 	
 }
   
+
 class Player {
-	
+	PVector position;
+
+	Player(float x, float y) {
+		position = new PVector(x, y);
+	}
+
+	public void update() {
+		if(down) {
+			down();
+		}
+		movement();
+	}
+
+
+	public void draw() {
+		fill(255, 255, 0 );
+		ellipse(position.x, position.y, 30, 30);
+	}
+
+	public void movement() {
+
+		//top-left
+		//if (position.x == width/4 && position.y == height/4) {
+		//	if(down) {
+		//		position.y = height/4*3;
+		//	}
+		//	if(right) {
+		//		position.x = width/4*3;
+		//	}
+		//}
+
+		//top-right
+		if (position.x == width/4*3 && position.y == height/4) {
+			if(down) {
+				position.y = height/4*3;
+			}
+			if(left) {
+				position.x = width/4;
+			}
+		}
+
+		//bottom-right
+		if (position.x == width/4*3 && position.y == height/4*3) {
+			if(up) {
+				position.y = height/4;
+			}
+			if(left) {
+				position.x = width/4;
+			}
+		}
+
+		//bottom-left
+		if (position.x == width/4 && position.y == height/4*3) {
+			if(up) {
+				position.y = height/4;
+			}
+			if(right) {
+				position.x = width/4*3;
+			}
+		}
+	}
+
+	public void down() {
+			if(position.y != height/4*3) {
+				position.y += 3;
+			}	
+	}
 }
 
+float deltaTime = 0;
+float time = 0;
 
+public class Time 
+{
+	public void DeltaTime() 
+	{
+		long currentTime = millis();
+	    deltaTime = (currentTime - time) * 0.001f;
+	    time = currentTime;
+	}
+}
 
 class World {
 	
 	public void worldCreation() {
+		//Background
+		background(0);
+
+
+		//Lines
 		strokeWeight(2);
 		rectMode(CENTER);
 		fill(255);
@@ -98,7 +238,7 @@ class World {
 	}	
 }
   public void settings() { 
-size(1920, 1080); }
+size(1920, 1014); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "PrivateSpaceShooter" };
     if (passedArgs != null) {
