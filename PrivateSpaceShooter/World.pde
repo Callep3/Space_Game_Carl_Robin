@@ -1,6 +1,11 @@
 class World {
 	
 	void worldCreation() {
+		//Background
+		background(0);
+
+
+		//Lines
 		strokeWeight(2);
 		rectMode(CENTER);
 		fill(255);
