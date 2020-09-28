@@ -1,5 +1,4 @@
 boolean up, down, left, right;
-class Input {
 
 	void keyPressed() {
 		if(key == 'w') {
@@ -15,6 +14,19 @@ class Input {
 			right = true;
 		}
 	}
-	
 
-}
+	void keyReleased() {
+		if(key == 'w') {
+			up = false;
+		}
+		if(key == 's') {
+			down = false;
+		}
+		if(key == 'a') {
+			left = false;
+		}
+		if(key == 'd') {
+			right = false;
+		}
+	}
+	
