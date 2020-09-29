@@ -1,32 +1,22 @@
-boolean up, down, left, right;
+boolean up, down, left, right, moveAnimation;
 
 	void keyPressed() {
-		if(key == 'w') {
+		if(key == 'w' && moveAnimation == false) {
 			up = true;
+			moveAnimation = true;
 		}
-		if(key == 's') {
+		if(key == 's' && moveAnimation == false) {
 			down = true;
+			moveAnimation = true;
 		}
-		if(key == 'a') {
+		if(key == 'a' && moveAnimation == false) {
 			left = true;
+			moveAnimation = true;
 		}
-		if(key == 'd') {
+		if(key == 'd' && moveAnimation == false) {
 			right = true;
+			moveAnimation = true;
 		}
 	}
 
-	void keyReleased() {
-		if(key == 'w') {
-			up = false;
-		}
-		if(key == 's') {
-			down = false;
-		}
-		if(key == 'a') {
-			left = false;
-		}
-		if(key == 'd') {
-			right = false;
-		}
-	}
 	
