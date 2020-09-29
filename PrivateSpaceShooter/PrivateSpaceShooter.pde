@@ -2,22 +2,24 @@ World world;
 Nexus nexus;
 Time myTime;
 Player player;
-Enemies myEnemy;
+SpawnManager spawnManager;
+//Enemy
 Enemies[] enemies;
 int enemySize = 20;
-float enemySpeed = 100.0;
+float enemySpeed = 50.0;
+float enemySpawnCd = 2000; //1000 == 1 second
 
 
 void setup() {
-world = new World();
-nexus = new Nexus();
-size(1920, 1014);
-background(0);
-//Remove Before Pushing
-surface.setLocation(-1923, 4);
-myEnemy = new Enemies(random(-enemySize, width + enemySize), enemySize);
-player = new Player(width / 4, height / 4);
-myTime = new Time();
+	world = new World();
+	nexus = new Nexus();
+	size(1920, 1014);
+	background(0);
+	surface.setLocation(-1923, 4);
+	enemies = new Enemies[0];
+	player = new Player(width / 4, height / 4);
+	myTime = new Time();
+	spawnManager = new SpawnManager();
 }
 
 void draw() {
@@ -26,6 +28,11 @@ void draw() {
 	nexus.NexusSpawn();
 	player.update();
 	player.draw();
-	myEnemy.update();
-	myEnemy.draw();
+
+	for (int i = 0; i < enemies.length; ++i) {
+		enemies[i].update();
+		enemies[i].draw();
+	}
+	
+	spawnManager.update();
 }
