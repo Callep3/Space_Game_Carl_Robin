@@ -1,7 +1,10 @@
+int playerSize = 30;
+
 class Player {
 	PVector position, topLeft, topRight, btmLeft, btmRight;
 	boolean topLeftPoint, topRightPoint, btmRightPoint, btmLeftPoint;
 	float speed = 2000;
+	int size = playerSize;
 
 
 	Player(float x, float y) {
@@ -10,7 +13,6 @@ class Player {
 		topRight = new PVector(width/4*2.6, height/4);
 		btmRight = new PVector(width/4*2.6, height/4*3);
 		position = new PVector(topLeft.x, topLeft.y);
-
 	}
 
 	void update() {
@@ -19,8 +21,8 @@ class Player {
 
 
 	void draw() {
-		fill(255, 255, 0 );
-		ellipse(position.x, position.y, 30, 30);
+		fill(255, 255, 0);
+		ellipse(position.x, position.y, size, size);
 	}
 
 
@@ -29,7 +31,7 @@ class Player {
 
 
 	void movement() {
-		//Check at whick point the player is currently at.
+		//Check at which point the player is currently at.
 		if(position.x == topLeft.x && position.y == topLeft.y) {
 			topLeftPoint = true;
 		}
@@ -90,7 +92,6 @@ class Player {
 				moveAnimation = false;
 			}
 		}
-
 
 		//bottom-right Point
 		if(up && btmRightPoint) {
