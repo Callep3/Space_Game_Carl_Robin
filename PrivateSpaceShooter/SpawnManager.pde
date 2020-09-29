@@ -28,6 +28,8 @@ public class SpawnManager {
 			}
 			Enemies enemySpawn = new Enemies(spawnLocation.x, spawnLocation.y);
 			enemies = (Enemies[]) append(enemies, enemySpawn);
+			println("frameRate: "+frameRate);
+			println("enemies.length: "+enemies.length);
 		}
 
 		if(bulletTime < time) {
