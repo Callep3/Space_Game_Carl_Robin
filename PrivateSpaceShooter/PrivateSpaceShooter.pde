@@ -1,3 +1,4 @@
+
 World world;
 Nexus nexus;
 Time myTime;
@@ -6,7 +7,6 @@ Enemies myEnemy;
 Enemies[] enemies;
 int enemySize = 20;
 float enemySpeed = 100.0;
-
 
 
 void setup() {

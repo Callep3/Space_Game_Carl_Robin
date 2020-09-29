@@ -21,14 +21,10 @@ class World {
 
 		//jumpPoints
 		fill(0, 255, 255);
-		ellipse(width/4, height/4, 20, 20);
-		ellipse(width/4*3, height/4, 20, 20);
-		ellipse(width/4, height/4*3, 20, 20);
-		ellipse(width/4*3, height/4*3, 20, 20);
-
-		//fakePlayer
-		fill(255, 255, 0 );
-		ellipse(width/4, height/4, 30, 30);
+		ellipse(width/4*1.4, height/4, 20, 20);
+		ellipse(width/4*2.6, height/4, 20, 20);
+		ellipse(width/4*1.4, height/4*3, 20, 20);
+		ellipse(width/4*2.6, height/4*3, 20, 20);
 
 	}	
 }
