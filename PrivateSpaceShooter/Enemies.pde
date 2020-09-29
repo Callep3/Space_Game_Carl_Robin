@@ -8,8 +8,8 @@ public class Enemies {
 		direction = new PVector(width/2 - position.x, height/2 - position.y).normalize();
 
 		velocity = new PVector(direction.x, direction.y);
-		velocity.x = velocity.x * deltaTime * enemySpeed;
-		velocity.y = velocity.y * deltaTime * enemySpeed;
+		velocity.x = velocity.x * enemySpeed;
+		velocity.y = velocity.y * enemySpeed;
 
 		r = 255;
 		g = 0;
@@ -17,8 +17,8 @@ public class Enemies {
 	}
 
 	void update() {
-		position.x += velocity.x;
-		position.y += velocity.y;
+		position.x += velocity.x * deltaTime;
+		position.y += velocity.y * deltaTime;
 	}
 
 	void draw() {

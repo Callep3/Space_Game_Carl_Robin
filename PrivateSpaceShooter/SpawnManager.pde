@@ -6,7 +6,9 @@ public class SpawnManager {
 	void update() {
 		if (spawnTime < time) {
 			spawnTime = time + enemySpawnCd;
-			enemySpawnCd -= 1;
+			if (enemySpawnCd > 500) {
+				enemySpawnCd -= 100;
+			}
 			int spawnSide = int(random(0, 4));
 			PVector spawnLocation;
 			spawnLocation = new PVector(random(30, width - 30), -enemySize);

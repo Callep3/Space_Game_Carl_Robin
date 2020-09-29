@@ -7,7 +7,7 @@ SpawnManager spawnManager;
 Enemies[] enemies;
 int enemySize = 20;
 float enemySpeed = 50.0;
-float enemySpawnCd = 2000; //1000 == 1 second
+float enemySpawnCd = 100; //1000 == 1 second
 
 
 void setup() {
@@ -33,6 +33,6 @@ void draw() {
 		enemies[i].update();
 		enemies[i].draw();
 	}
-	
+
 	spawnManager.update();
 }
