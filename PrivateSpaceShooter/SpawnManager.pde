@@ -7,7 +7,7 @@ public class SpawnManager {
 		if (spawnTime < time) {
 			spawnTime = time + enemySpawnCd;
 			if (enemySpawnCd > 500) {
-				enemySpawnCd -= 100;
+				enemySpawnCd -= 5;
 			}
 			int spawnSide = int(random(0, 4));
 			PVector spawnLocation;
@@ -28,6 +28,8 @@ public class SpawnManager {
 			}
 			Enemies enemySpawn = new Enemies(spawnLocation.x, spawnLocation.y);
 			enemies = (Enemies[]) append(enemies, enemySpawn);
+			println("frameRate: "+frameRate);
+			println("enemies.length: "+enemies.length);
 		}
 	}
 }

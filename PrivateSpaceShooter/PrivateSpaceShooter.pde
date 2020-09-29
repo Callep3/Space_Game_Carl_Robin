@@ -1,13 +1,10 @@
+//Classes
 World world;
 Nexus nexus;
 Time myTime;
 Player player;
 SpawnManager spawnManager;
-//Enemy
-Enemies[] enemies;
-int enemySize = 20;
-float enemySpeed = 50.0;
-float enemySpawnCd = 100; //1000 == 1 second
+Collision collision;
 
 
 void setup() {
@@ -20,19 +17,22 @@ void setup() {
 	player = new Player(width / 4, height / 4);
 	myTime = new Time();
 	spawnManager = new SpawnManager();
+	collision = new Collision();
 }
 
 void draw() {
 	myTime.DeltaTime();
 	world.worldCreation();
 	nexus.NexusSpawn();
-	player.update();
-	player.draw();
-
+	
 	for (int i = 0; i < enemies.length; ++i) {
-		enemies[i].update();
-		enemies[i].draw();
+		if (enemies[i].alive) {
+			enemies[i].update();
+			enemies[i].draw();
+		}
 	}
 
+	player.update();
+	player.draw();
 	spawnManager.update();
 }
