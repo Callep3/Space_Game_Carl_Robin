@@ -1,13 +1,13 @@
 public class SpawnManager {
-
 	float spawnTime = 2000; //1000 == 1 second before something spawns when the game starts
+	float bulletTime = 500;
 
 
 	void update() {
 		if (spawnTime < time) {
 			spawnTime = time + enemySpawnCd;
 			if (enemySpawnCd > 500) {
-				enemySpawnCd -= 100;
+				enemySpawnCd -= 5;
 			}
 			int spawnSide = int(random(0, 4));
 			PVector spawnLocation;
@@ -29,5 +29,14 @@ public class SpawnManager {
 			Enemies enemySpawn = new Enemies(spawnLocation.x, spawnLocation.y);
 			enemies = (Enemies[]) append(enemies, enemySpawn);
 		}
+
+		if(bulletTime < time) {
+			bulletTime = time + bulletSpawnCd;
+			Bullet bulletSpawn = new Bullet(player.position.x, player.position.y);
+			bullets = (Bullet[]) append(bullets, bulletSpawn);
+		}
+
 	}
+
+
 }

@@ -10,8 +10,8 @@ class Player {
 		topRight = new PVector(width/4*2.6, height/4);
 		btmRight = new PVector(width/4*2.6, height/4*3);
 		position = new PVector(topLeft.x, topLeft.y);
-	}
 
+	}
 
 	void update() {
 		movement();
@@ -21,6 +21,10 @@ class Player {
 	void draw() {
 		fill(255, 255, 0 );
 		ellipse(position.x, position.y, 30, 30);
+	}
+
+
+	void mousePressed() {
 	}
 
 

@@ -8,9 +8,9 @@ class World {
 		//Lines
 		strokeWeight(2);
 		rectMode(CENTER);
-		fill(255);
-		rect(width/2, height/2, width, 10);
-		rect(width/2, height/2, 10, height);
+		fill(180);
+		rect(width/2, height/2, width, 5);
+		rect(width/2, height/2, 5, height);
 
 
 		//Nexus
