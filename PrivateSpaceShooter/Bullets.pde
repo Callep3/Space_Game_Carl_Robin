@@ -7,6 +7,7 @@ class Bullet {
 	PVector position, direction, mousePosition;
 	int bulletVelocity = 600;
 	int size = bulletSize;
+	boolean insidePlayArea = true;
 
 	Bullet(float x, float y) {
 		position = new PVector(x, y);
@@ -16,21 +17,34 @@ class Bullet {
 		mousePosition.x = (mouseX);
 		mousePosition.y = (mouseY);
 
-		//Flyttade upp denna så stannar inte bulletsen
-		direction.x = ((mousePosition.x - position.x) * 4);	//Varför dubbel parantes?
-		direction.y = ((mousePosition.y - position.y) * 4); //Varför ha "* 4" på dessa om de nu sedan bara blir normalizade?
+		
+		direction.x = ((mousePosition.x - position.x));	
+		direction.y = ((mousePosition.y - position.y));
 	}
 
 	void update() {
 		direction.normalize();
-
 		position.add(direction.mult(bulletVelocity).mult(deltaTime));
+		offScreenDeactivation();
+		Collision();
 	}
 
 
 	void draw() {
 		ellipseMode(CENTER);
 		fill(255);
-		ellipse(position.x, position.y, size, size); //Ändrade till "size" och gjorde en local int. Detta gör så att vi kan lätt använda Collision scriptsen
+		ellipse(position.x, position.y, size, size);
+	}
+
+	void offScreenDeactivation() {
+		for(int i = 0; i < bullets.length; i++) {
+			if (bullets[i].position.x < 0 || bullets[i].position.x > width || bullets[i].position.y < 0 || bullets[i].position.y > height) {
+				bullets[i].insidePlayArea = false;
+			}
+		}
+	}
+
+	void Collision() {
+
 	}
 }

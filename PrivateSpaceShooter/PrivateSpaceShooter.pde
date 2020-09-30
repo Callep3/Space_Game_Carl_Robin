@@ -28,8 +28,11 @@ void draw() {
 	//nexus.NexusSpawn();
 
 	for(int i = 0; i < bullets.length; i++) {
-		bullets[i].update();
-		bullets[i].draw();
+		if (bullets[i].insidePlayArea) {
+			bullets[i].update();
+			bullets[i].draw();
+		}
+		
 	}
 
 	for (int i = 0; i < enemies.length; ++i) {
