@@ -19,6 +19,12 @@ class World {
 		ellipseMode(CENTER);
 		fill(0, 220, 0);
 		ellipse(width/2, height/2, nexusSize, nexusSize);
+		//NexusHealth
+		fill(0);
+		textAlign(CENTER);
+		textSize(50);
+		text(nexusHealth, width/2, height/2 + 15);
+
 
 
 		//jumpPoints

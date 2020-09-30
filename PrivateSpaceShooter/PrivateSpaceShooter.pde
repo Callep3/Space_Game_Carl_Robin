@@ -24,15 +24,23 @@ void setup() {
 
 void draw() {
 	myTime.DeltaTime();
+
+	if (nexusHealth <= 0) {
+		textAlign(CENTER);
+		fill(200, 60, 60);
+		textSize(200);
+		text("Game Over", width/2, height/2 + 50);
+		nexusHealth = 0;
+		return;
+	}
+
 	world.worldCreation();
-	//nexus.NexusSpawn();
 
 	for(int i = 0; i < bullets.length; i++) {
 		if (bullets[i].insidePlayArea) {
 			bullets[i].update();
 			bullets[i].draw();
 		}
-		
 	}
 
 	for (int i = 0; i < enemies.length; ++i) {

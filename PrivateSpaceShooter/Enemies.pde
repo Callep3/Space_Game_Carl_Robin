@@ -39,8 +39,9 @@ public class Enemies {
 
 	void Collision() {
 		for (int i = 0; i < enemies.length; ++i) {
-			if (collision.roundCollision(enemies[i], nexus)) {
+			if (collision.roundCollision(enemies[i], nexus) && enemies[i].alive) {
 				enemies[i].alive = false;
+				nexusHealth -= 1;
 			}
 		}
 	}
