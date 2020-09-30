@@ -46,9 +46,9 @@ public class Enemies {
 		}
 		for (int i = 0; i < enemies.length; ++i) {
 			for (int j = 0; j < bullets.length; ++j) {
-				if (collision.bulletEnemyCollision(bullets[j], enemies[i]) && enemies[i].alive && bullets[j].insidePlayArea) {
+				if (collision.bulletEnemyCollision(bullets[j], enemies[i]) && enemies[i].alive && bullets[j].isRendered) {
 					enemies[i].alive = false;
-					bullets[j].insidePlayArea = false;
+					bullets[j].isRendered = false;
 				}
 			}
 
