@@ -1,14 +1,16 @@
 Bullet[] bullets;
 int bulletSize = 10;
-float bulletSpawnCd = 2000; //1000 == 1 second
-float bulletSpeed = 150;
-
+float bulletSpawnCd = 500; //1000 == 1 second
+float bulletTime = 500;
+int bouncce = 0;
 
 class Bullet {
 	PVector position, direction, mousePosition;
-	int bulletVelocity = 600;
+	int bulletVelocity = 1000;
 	int size = bulletSize;
 	boolean insidePlayArea = true;
+	boolean xBounce = true;
+	boolean yBounce = true;
 
 
 	Bullet(float x, float y) {
@@ -19,7 +21,6 @@ class Bullet {
 		mousePosition.x = (mouseX);
 		mousePosition.y = (mouseY);
 
-		
 		direction.x = ((mousePosition.x - position.x));	
 		direction.y = ((mousePosition.y - position.y));
 	}
@@ -51,11 +52,13 @@ class Bullet {
 
 	void borderBounce() {
 		for (int i = 0; i < bullets.length; ++i) {
-			if (bullets[i].position.x >= width/2 - size*2 && bullets[i].position.x <= width/2 + size*2) {
+			if (bullets[i].position.x >= width/2 - size*2 && bullets[i].position.x <= width/2 + size*2 && bullets[i].xBounce == true) {
 				bullets[i].direction.x *= -1;
+				bullets[i].xBounce = false;
 			}
-			if (bullets[i].position.y >= height/2 - size*2 && bullets[i].position.y <= height/2 + size*2) {
+			if (bullets[i].position.y >= height/2 - size*2 && bullets[i].position.y <= height/2 + size*2 && bullets[i].yBounce == true) {
 				bullets[i].direction.y *= -1;
+				bullets[i].yBounce = false;
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 public class SpawnManager {
 	//1000 == 1 second before something spawns when the game starts
 	float spawnTime = 2000;
-	float bulletTime = 500;
+	
 
 	void update() {
 		if (spawnTime < time) {
@@ -31,8 +31,7 @@ public class SpawnManager {
 			Enemies enemySpawn = new Enemies(spawnLocation.x, spawnLocation.y);
 			enemies = (Enemies[]) append(enemies, enemySpawn);
 		}
-
-		if(bulletTime < time) {
+		if(bulletTime < time && mouseHeld) {
 			bulletTime = time + bulletSpawnCd;
 
 			Bullet bulletSpawn = new Bullet(player.position.x, player.position.y);
