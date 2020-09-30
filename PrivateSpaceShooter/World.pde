@@ -34,15 +34,6 @@ class World {
 		ellipse(width/4*2.6, height/4*3, jumpPointSize, jumpPointSize);
 
 
-		//Shields
-		stroke(60, 200, 20);
-		line(width/2-150, height/2, width/2, height/2-150);
-		line(width/2-150, height/2, width/2, height/2+150);
-		line(width/2, height/2+150, width/2+150, height/2);
-		line(width/2+150, height/2, width/2, height/2-150);
-
-
-		//Reset stroke color
-		stroke(0);
+		
 	}
 }
