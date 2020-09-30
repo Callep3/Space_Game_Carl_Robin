@@ -8,7 +8,7 @@ class Bullet {
 	PVector position, direction, mousePosition;
 	int bulletVelocity = 1000;
 	int size = bulletSize;
-	boolean insidePlayArea = true;
+	boolean isRendered = true;
 	boolean xBounce = true;
 	boolean yBounce = true;
 
@@ -45,7 +45,7 @@ class Bullet {
 	void offScreenDeactivation() {
 		for(int i = 0; i < bullets.length; i++) {
 			if (bullets[i].position.x < 0 || bullets[i].position.x > width || bullets[i].position.y < 0 || bullets[i].position.y > height) {
-				bullets[i].insidePlayArea = false;
+				bullets[i].isRendered = false;
 			}
 		}
 	}
@@ -65,8 +65,8 @@ class Bullet {
 
 	void Collision() {
 		for (int i = 0; i < bullets.length; ++i) {
-			if (collision.bulletNexusCollision(bullets[i], nexus) && bullets[i].insidePlayArea) {
-				bullets[i].insidePlayArea = false;
+			if (collision.bulletNexusCollision(bullets[i], nexus) && bullets[i].isRendered) {
+				bullets[i].isRendered = false;
 			}
 		}
 	}

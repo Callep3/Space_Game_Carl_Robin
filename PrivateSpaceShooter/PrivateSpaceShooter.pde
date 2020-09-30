@@ -37,7 +37,7 @@ void draw() {
 	world.worldCreation();
 
 	for(int i = 0; i < bullets.length; i++) {
-		if (bullets[i].insidePlayArea) {
+		if (bullets[i].isRendered) {
 			bullets[i].update();
 			bullets[i].draw();
 		}
