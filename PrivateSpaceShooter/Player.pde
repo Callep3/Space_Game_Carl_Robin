@@ -68,6 +68,16 @@ class Player {
 				moveAnimation = false;
 			}
 		}
+		if(left && topLeftPoint) {
+			left = false;
+			topLeftPoint = false;
+			moveAnimation = false;
+		}
+		if(up && topLeftPoint) {
+			up = false;
+			topLeftPoint = false;
+			moveAnimation = false;
+		}
 
 		//top-right Point
 		if(down && topRightPoint) {
@@ -91,6 +101,16 @@ class Player {
 				topRightPoint = false;
 				moveAnimation = false;
 			}
+		}
+		if(right && topRightPoint) {
+			right = false;
+			topRightPoint = false;
+			moveAnimation = false;
+		}
+		if(up && topRightPoint) {
+			up = false;
+			topRightPoint = false;
+			moveAnimation = false;
 		}
 
 		//bottom-right Point
@@ -116,6 +136,16 @@ class Player {
 				moveAnimation = false;
 			}
 		}
+		if(right && btmRightPoint) {
+			right = false;
+			btmRightPoint = false;
+			moveAnimation = false;
+		}
+		if(down && btmRightPoint) {
+			down = false;
+			btmRightPoint = false;
+			moveAnimation = false;
+		}
 
 		//bottom-left Point
 		if(up && btmLeftPoint) {
@@ -139,6 +169,16 @@ class Player {
 				btmLeftPoint = false;
 				moveAnimation = false;
 			}
+		}
+		if(left && btmLeftPoint) {
+			left = false;
+			btmLeftPoint = false;
+			moveAnimation = false;
+		}
+		if(down && btmLeftPoint) {
+			down = false;
+			btmLeftPoint = false;
+			moveAnimation = false;
 		}
 	} 
 }
