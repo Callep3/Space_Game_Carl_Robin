@@ -45,10 +45,10 @@ public class Enemies {
 			}
 		}
 		for (int i = 0; i < enemies.length; ++i) {
-			for (int j = 0; j < bullets.length; ++j) {
-				if (collision.bulletEnemyCollision(bullets[j], enemies[i]) && enemies[i].alive && bullets[j].isRendered) {
+			for (int j = 0; j < playerBullets.length; ++j) {
+				if (collision.playerBulletEnemyCollision(playerBullets[j], enemies[i]) && enemies[i].alive && playerBullets[j].isRendered) {
 					enemies[i].alive = false;
-					bullets[j].isRendered = false;
+					playerBullets[j].isRendered = false;
 				}
 			}
 

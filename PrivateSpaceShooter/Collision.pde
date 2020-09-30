@@ -18,7 +18,7 @@ public class Collision {
 	}
 
 
-	boolean bulletEnemyCollision(Bullet one, Enemies two) {
+	boolean playerBulletEnemyCollision(PlayerBullet one, Enemies two) {
 		float maxDistance = (one.size + two.size) / 2;
 
 		if(abs(one.position.x - two.position.x) > maxDistance ||  
@@ -36,7 +36,7 @@ public class Collision {
 		}
 	}
 
-	boolean bulletNexusCollision(Bullet one, Nexus two) {
+	boolean playerBulletNexusCollision(PlayerBullet one, Nexus two) {
 		float maxDistance = (one.size + two.size) / 2;
 
 		if(abs(one.position.x - two.position.x) > maxDistance ||  

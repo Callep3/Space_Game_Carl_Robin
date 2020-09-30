@@ -18,7 +18,7 @@ void setup() {
 	collision = new Collision();
 
 	enemies = new Enemies[0];
-	bullets = new Bullet[0];
+	playerBullets = new PlayerBullet[0];
 	player = new Player(width / 4, height / 4);
 }
 
@@ -36,10 +36,10 @@ void draw() {
 
 	world.worldCreation();
 
-	for(int i = 0; i < bullets.length; i++) {
-		if (bullets[i].isRendered) {
-			bullets[i].update();
-			bullets[i].draw();
+	for(int i = 0; i < playerBullets.length; i++) {
+		if (playerBullets[i].isRendered) {
+			playerBullets[i].update();
+			playerBullets[i].draw();
 		}
 	}
 

@@ -31,11 +31,11 @@ public class SpawnManager {
 			Enemies enemySpawn = new Enemies(spawnLocation.x, spawnLocation.y);
 			enemies = (Enemies[]) append(enemies, enemySpawn);
 		}
-		if(bulletTime < time && mouseHeld) {
-			bulletTime = time + bulletSpawnCd;
+		if(playerBulletTime < time && mouseHeld) {
+			playerBulletTime = time + playerBulletSpawnCd;
 
-			Bullet bulletSpawn = new Bullet(player.position.x, player.position.y);
-			bullets = (Bullet[]) append(bullets, bulletSpawn);
+			PlayerBullet bulletSpawn = new PlayerBullet(player.position.x, player.position.y);
+			playerBullets = (PlayerBullet[]) append(playerBullets, bulletSpawn);
 		}
 	}
 }
