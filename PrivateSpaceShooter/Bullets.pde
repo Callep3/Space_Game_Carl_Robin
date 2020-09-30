@@ -1,7 +1,7 @@
 Bullet[] bullets;
 int bulletSize = 10;
 float bulletSpawnCd = 200; //1000 == 1 second
-float bulletSpeed = 300;
+float bulletSpeed = 150;
 
 class Bullet {
 	PVector position, direction, mousePosition;
