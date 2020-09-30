@@ -26,10 +26,6 @@ class Player {
 	}
 
 
-	void mousePressed() {
-	}
-
-
 	void movement() {
 		//Check at which point the player is currently at.
 		if(position.x == topLeft.x && position.y == topLeft.y) {

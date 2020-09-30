@@ -19,6 +19,7 @@ void setup() {
 
 	enemies = new Enemies[0];
 	playerBullets = new PlayerBullet[0];
+	enemyBullets = new EnemyBullet[0];
 	player = new Player(width / 4, height / 4);
 }
 
@@ -40,6 +41,13 @@ void draw() {
 		if (playerBullets[i].isRendered) {
 			playerBullets[i].update();
 			playerBullets[i].draw();
+		}
+	}
+
+	for (int i = 0; i < enemyBullets.length; ++i) {
+		if(enemyBullets[i].isRendered) {
+			enemyBullets[i].update();
+			enemyBullets[i].draw();
 		}
 	}
 

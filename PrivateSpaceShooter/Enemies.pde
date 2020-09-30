@@ -8,6 +8,8 @@ public class Enemies {
 	int r, g, b;
 	int size;
 	boolean alive = true;
+	float bulletTime = enemyBulletTime;
+	float bulletSpawnCd = enemyBulletSpawnCd;
 
 	public Enemies(float x, float y) {
 		position = new PVector(x, y);
