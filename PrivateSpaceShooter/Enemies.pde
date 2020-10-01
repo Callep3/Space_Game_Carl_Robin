@@ -62,6 +62,7 @@ public class Enemies {
 				if (collision.playerBulletEnemyCollision(playerBullets[j], enemies[i]) && enemies[i].alive && playerBullets[j].isRendered) {
 					enemies[i].alive = false;
 					playerBullets[j].isRendered = false;
+					score += 5;
 				}
 			}
 

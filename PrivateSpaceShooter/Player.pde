@@ -3,7 +3,7 @@ int playerSize = 30;
 class Player {
 	PVector position, topLeft, topRight, btmLeft, btmRight;
 	boolean topLeftPoint, topRightPoint, btmRightPoint, btmLeftPoint;
-	float speed = 2000;
+	float speed = 2500;
 	int size = playerSize;
 
 

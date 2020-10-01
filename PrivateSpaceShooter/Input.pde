@@ -17,6 +17,9 @@ void keyPressed() {
 		right = true;
 		moveAnimation = true;
 	}
+	if(key == 'g') {
+		startGame = true;
+	}
 }
 
 void mousePressed() {

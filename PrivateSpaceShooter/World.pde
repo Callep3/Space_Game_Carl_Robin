@@ -1,5 +1,5 @@
 int borderWidth = 5;
-int jumpPointSize = 20;
+int jumpPointSize = 15;
 
 class World {
 	void worldCreation() {
@@ -27,7 +27,7 @@ class World {
 
 
 		//jumpPoints
-		fill(0, 255, 255);
+		fill(255, 255, 0);
 		ellipse(width/4*1.4, height/4, jumpPointSize, jumpPointSize);
 		ellipse(width/4*2.6, height/4, jumpPointSize, jumpPointSize);
 		ellipse(width/4*1.4, height/4*3, jumpPointSize, jumpPointSize);
