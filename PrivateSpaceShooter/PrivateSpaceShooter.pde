@@ -22,7 +22,7 @@ void setup() {
 	player = new Player(width / 4, height / 4);
 
 	size(1920, 1014);
-	surface.setLocation(-1923, 4);
+	surface.setLocation(-0, 0);
 	shields.setup();
 }
 
@@ -30,6 +30,16 @@ void draw() {
 	myTime.DeltaTime();
 
 	if (nexusHealth <= 0) {
+		//Nexus
+		ellipseMode(CENTER);
+		fill(0, 220, 0);
+		ellipse(width/2, height/2, nexusSize, nexusSize);
+		//NexusHealth
+		fill(0);
+		textAlign(CENTER);
+		textSize(50);
+		text(nexusHealth, width/2, height/2 + 15);
+		//Game Over Text
 		textAlign(CENTER);
 		fill(200, 60, 60);
 		textSize(200);
@@ -50,6 +60,7 @@ void draw() {
 		if(enemyBullets[i].isRendered) {
 			enemyBullets[i].update();
 			enemyBullets[i].draw();
+			nexus.collision(i);
 		}
 	}
 

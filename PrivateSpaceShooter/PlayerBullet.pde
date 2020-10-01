@@ -1,16 +1,16 @@
 PlayerBullet[] playerBullets;
 int playerBulletSize = 10;
-float playerBulletSpawnCd = 500; //1000 == 1 second
+float playerBulletSpawnCd = 350; //1000 == 1 second
 float playerBulletTime = 500;
-int bouncce = 0;
 
 class PlayerBullet {
 	PVector position, direction, mousePosition;
-	int playerBulletVelocity = 1000;
+	int playerBulletVelocity = 500;
 	int size = playerBulletSize;
 	boolean isRendered = true;
 	boolean xBounce = true;
 	boolean yBounce = true;
+	boolean shieldBounce = true;
 
 
 	PlayerBullet(float x, float y) {
@@ -52,11 +52,11 @@ class PlayerBullet {
 
 	void borderBounce() {
 		for (int i = 0; i < playerBullets.length; ++i) {
-			if (playerBullets[i].position.x >= width/2 - size*2 && playerBullets[i].position.x <= width/2 + size*2 && playerBullets[i].xBounce == true) {
+			if (playerBullets[i].position.x >= width/2 - size && playerBullets[i].position.x <= width/2 + size && playerBullets[i].xBounce == true) {
 				playerBullets[i].direction.x *= -1;
 				playerBullets[i].xBounce = false;
 			}
-			if (playerBullets[i].position.y >= height/2 - size*2 && playerBullets[i].position.y <= height/2 + size*2 && playerBullets[i].yBounce == true) {
+			if (playerBullets[i].position.y >= height/2 - size && playerBullets[i].position.y <= height/2 + size && playerBullets[i].yBounce == true) {
 				playerBullets[i].direction.y *= -1;
 				playerBullets[i].yBounce = false;
 			}

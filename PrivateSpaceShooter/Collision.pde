@@ -1,23 +1,4 @@
 public class Collision { 
-	boolean enemyNexusCollision(Enemies one, Nexus two) {
-		float maxDistance = (one.size + two.size) / 2;
-
-		if(abs(one.position.x - two.position.x) > maxDistance ||  
-			abs(one.position.y - two.position.y) > maxDistance)
-		{
-			return false;
-		}
-		else if(dist(one.position.x, one.position.y, two.position.x, two.position.y) > maxDistance)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-	}
-
-
 	boolean playerBulletEnemyCollision(PlayerBullet one, Enemies two) {
 		float maxDistance = (one.size + two.size) / 2;
 
@@ -37,6 +18,42 @@ public class Collision {
 	}
 
 	boolean playerBulletNexusCollision(PlayerBullet one, Nexus two) {
+		float maxDistance = (one.size + two.size) / 2;
+
+		if(abs(one.position.x - two.position.x) > maxDistance ||  
+			abs(one.position.y - two.position.y) > maxDistance)
+		{
+			return false;
+		}
+		else if(dist(one.position.x, one.position.y, two.position.x, two.position.y) > maxDistance)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+	boolean enemyNexusCollision(Enemies one, Nexus two) {
+		float maxDistance = (one.size + two.size) / 2;
+
+		if(abs(one.position.x - two.position.x) > maxDistance ||  
+			abs(one.position.y - two.position.y) > maxDistance)
+		{
+			return false;
+		}
+		else if(dist(one.position.x, one.position.y, two.position.x, two.position.y) > maxDistance)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	boolean enemyBulletNexusCollision(EnemyBullet one, Nexus two) {
 		float maxDistance = (one.size + two.size) / 2;
 
 		if(abs(one.position.x - two.position.x) > maxDistance ||  
@@ -90,6 +107,41 @@ public class Collision {
 	}
 
 	boolean enemyBulletShieldsCollision(EnemyBullet one, float x1, float y1, float x2, float y2) {
+		float cx = one.position.x;
+		float cy = one.position.y;
+		float r = one.size/2;
+
+		boolean inside1 = pointCircle(x1,y1, cx,cy,r);
+		boolean inside2 = pointCircle(x2,y2, cx,cy,r);
+		if (inside1 || inside2) {
+			return true;
+		}
+
+		float distX = x1 - x2;
+		float distY = y1 - y2;
+		float len = sqrt( (distX*distX) + (distY*distY) );
+
+		float dot = ( ((cx-x1)*(x2-x1)) + ((cy-y1)*(y2-y1)) ) / pow(len,2);
+
+		float closestX = x1 + (dot * (x2-x1));
+		float closestY = y1 + (dot * (y2-y1));
+
+		boolean onSegment = linePoint(x1,y1,x2,y2, closestX,closestY);
+		if (!onSegment) {
+			return false;
+		}
+
+		distX = closestX - cx;
+		distY = closestY - cy;
+		float distance = sqrt( (distX*distX) + (distY*distY) );
+
+		if (distance <= r) {
+			return true;
+		}
+		return false;
+	}
+
+	boolean playerBulletShieldsCollision(PlayerBullet one, float x1, float y1, float x2, float y2) {
 		float cx = one.position.x;
 		float cy = one.position.y;
 		float r = one.size/2;
