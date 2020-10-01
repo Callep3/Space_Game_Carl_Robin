@@ -1,7 +1,7 @@
 Enemies[] enemies;
 int enemySize = 20;
 float enemySpeed = 50.0;
-float enemySpawnCd = 100; //1000 == 1 second
+float enemySpawnCd = 2000; //1000 == 1 second
 
 public class Enemies {
 	PVector direction, position, velocity;
