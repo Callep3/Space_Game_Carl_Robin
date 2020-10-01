@@ -1,5 +1,5 @@
 int topLftShield, topRgtShield, btmLftShield, btmRgtShield;
-int shieldMaxHealth = 5000;
+int shieldMaxHealth = 50;
 
 public class Shields {
 	float lftShieldPoint = width/2-150;
