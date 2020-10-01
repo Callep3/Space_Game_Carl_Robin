@@ -54,7 +54,45 @@ public class Shields {
 						}
 						break;
 				}
-			}	
+			}
+		}
+		for (int i = 0; i < enemyBullets.length; ++i) {
+			for (int n = 0; n < numberOfShields; ++n) {
+				switch (n) {
+					case 0:
+						if (topLftShield > 0) {
+							if (collision.enemyBulletShieldsCollision(enemyBullets[i], lftShieldPoint, middleShieldPointHeight, middleShieldPointWidth, topShieldPoint) && enemyBullets[i].isRendered) {
+								enemyBullets[i].isRendered = false;
+								topLftShield -= 1;
+							}
+						}
+						break;
+					case 1:
+						if (topRgtShield > 0) {
+							if (collision.enemyBulletShieldsCollision(enemyBullets[i], middleShieldPointWidth, topShieldPoint, rgtShieldPoint, middleShieldPointHeight) && enemyBullets[i].isRendered) {
+								enemyBullets[i].isRendered = false;
+								topRgtShield -= 1;
+							}
+						}
+						break;
+					case 2:
+						if (btmLftShield > 0) {
+							if (collision.enemyBulletShieldsCollision(enemyBullets[i], middleShieldPointWidth, btmShieldPoint, lftShieldPoint, middleShieldPointHeight) && enemyBullets[i].isRendered) {
+								enemyBullets[i].isRendered = false;
+								btmLftShield -= 1;
+							}
+						}
+						break;
+					case 3:
+						if (btmRgtShield > 0) {
+							if (collision.enemyBulletShieldsCollision(enemyBullets[i], rgtShieldPoint, middleShieldPointHeight, middleShieldPointWidth, btmShieldPoint) && enemyBullets[i].isRendered) {
+								enemyBullets[i].isRendered = false;
+								btmRgtShield -= 1;
+							}
+						}
+						break;
+				}
+			}
 		}
 	}
 
