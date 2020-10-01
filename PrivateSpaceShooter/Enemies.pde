@@ -31,10 +31,9 @@ public class Enemies {
 		velocity.x = velocity.x * enemySpeed;
 		velocity.y = velocity.y * enemySpeed;
 
-		r = 255;
-		g = 0;
-		b = 0;
-
+		r = 164;
+		g = 55;
+		b = 65;
 		size = enemySize;
 	}
 
@@ -48,6 +47,15 @@ public class Enemies {
 		ellipseMode(CENTER);
 		fill(r, g, b);
 		ellipse(position.x, position.y, size, size);
+		fill(215, 180, 70);
+		strokeWeight(1);
+		rect(position.x - 8, position.y, 10, 5);
+		rect(position.x + 8, position.y, 10, 5);
+		rect(position.x, position.y - 8, 5, 10);
+		rect(position.x, position.y + 8, 5, 10);
+		//ellipse(position.x-8, position.y-4, 7, 7);
+		//ellipse(position.x+8, position.y-4, 7, 7);
+
 	}
 
 	void Collision() {

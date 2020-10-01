@@ -32,9 +32,21 @@ class Player {
 	}
 
 
-	void draw() {
-		fill(255, 255, 0);
-		ellipse(position.x, position.y, size, size);
+	void draw() { 
+		fill(200, 252, 234);
+		strokeWeight(1);
+		ellipse(position.x, position.y, size+3, size+3);
+		fill(0);
+		ellipse(position.x + 13, position.y, 3, 3);
+		ellipse(position.x - 13, position.y, 3, 3);
+		ellipse(position.x, position.y + 13, 3, 3);
+		ellipse(position.x, position.y - 13, 3, 3);
+		ellipse(position.x + 9.5, position.y + 9.5, 3, 3);
+		ellipse(position.x - 9.5, position.y + 9.5, 3, 3);
+		ellipse(position.x + 9.5, position.y - 9.5, 3, 3);
+		ellipse(position.x - 9.5, position.y - 9.5, 3, 3);
+		fill(20, 230, 151);
+		ellipse(position.x, position.y, size-12, size-12);
 	}
 
 

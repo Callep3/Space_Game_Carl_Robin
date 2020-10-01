@@ -39,7 +39,7 @@ class PlayerBullet {
 
 	void draw() {
 		ellipseMode(CENTER);
-		fill(255);
+		fill(20, 230, 151);
 		ellipse(position.x, position.y, size, size);
 	}
 

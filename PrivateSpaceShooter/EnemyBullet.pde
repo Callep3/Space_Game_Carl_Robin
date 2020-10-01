@@ -5,7 +5,7 @@ float enemyBulletTime = 500;
 
 class EnemyBullet {
 	PVector position, direction, velocity;
-	int enemyBulletVelocity = 500;
+	int enemyBulletVelocity = 350;
 	int size = enemyBulletSize;
 	boolean isRendered = true;
 	
@@ -31,7 +31,7 @@ class EnemyBullet {
 
 	void draw() {
 		ellipseMode(CENTER);
-		fill(255, 0, 0);
+		fill(164, 44, 65);
 		ellipse(position.x, position.y, enemyBulletSize, enemyBulletSize);
 	}
 

@@ -7,9 +7,13 @@ SpawnManager spawnManager;
 Collision collision;
 Shields shields;
 UserInterface userInterface;
+PImage backgroundImage;
+PImage nexusImage;
 
 
 void setup() {
+	backgroundImage = loadImage("background.PNG");
+	nexusImage = loadImage("nexus.PNG");
 	world = new World();
 	nexus = new Nexus();
 	myTime = new Time();

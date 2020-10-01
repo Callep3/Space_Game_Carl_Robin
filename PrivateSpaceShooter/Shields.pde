@@ -192,8 +192,8 @@ public class Shields {
 
 	void draw() {
 		//Shields
-		stroke(60, 200, 20);
-		fill(60, 200, 20);
+		stroke(20, 230, 151);
+		fill(20, 230, 151);
 		textSize(25);
 		textAlign(CENTER);
 		if (topLftShield > 0) {

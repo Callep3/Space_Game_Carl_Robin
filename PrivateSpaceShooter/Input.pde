@@ -1,4 +1,4 @@
-boolean up, down, left, right, moveAnimation, mouseHeld; //isMoving är ett bättre variabel namn i det här sammanhanget
+boolean up, down, left, right, moveAnimation, mouseHeld; 
 
 void keyPressed() {
 	if(key == 'w' && moveAnimation == false) {
