@@ -41,7 +41,6 @@ public class Shields {
 									topLftShield += 1;
 								}
 								if (playerBullets[i].xBounce == true && playerBullets[i].yBounce == true) {
-									println("touch");
 									playerBullets[i].direction.x *= -1;
 									playerBullets[i].direction.y *= -1;
 									playerBullets[i].xBounce = false;
@@ -71,7 +70,6 @@ public class Shields {
 									topRgtShield += 1;
 								}
 								if (playerBullets[i].xBounce == true && playerBullets[i].yBounce == true) {
-									println("touch");
 									playerBullets[i].direction.x *= -1;
 									playerBullets[i].direction.y *= -1;
 									playerBullets[i].xBounce = false;
@@ -101,7 +99,6 @@ public class Shields {
 									btmLftShield += 1;
 								}
 								if (playerBullets[i].xBounce == true && playerBullets[i].yBounce == true) {
-									println("touch");
 									playerBullets[i].direction.x *= -1;
 									playerBullets[i].direction.y *= -1;
 									playerBullets[i].xBounce = false;
@@ -131,7 +128,6 @@ public class Shields {
 									btmRgtShield += 1;
 								}
 								if (playerBullets[i].xBounce == true && playerBullets[i].yBounce == true) {
-									println("touch");
 									playerBullets[i].direction.x *= -1;
 									playerBullets[i].direction.y *= -1;
 									playerBullets[i].xBounce = false;
