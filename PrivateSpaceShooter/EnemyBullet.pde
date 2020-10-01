@@ -4,7 +4,7 @@ float enemyBulletSpawnCd = 3000; //1000 == 1 second
 float enemyBulletTime = 500;
 
 class EnemyBullet {
-	PVector position, direction;
+	PVector position, direction, velocity;
 	int enemyBulletVelocity = 500;
 	int size = enemyBulletSize;
 	boolean isRendered = true;
@@ -14,15 +14,16 @@ class EnemyBullet {
 	EnemyBullet(float x, float y) {
 		position = new PVector(x, y);
 		direction = new PVector(width/2 - position.x, height/2 - position.y);
-
+		velocity = new PVector(0, 0);
 	}
 
 
 	void update() {
 		direction.normalize();
 		offScreenDeactivation();
+		velocity = direction.mult(enemyBulletVelocity).mult(deltaTime);
 
-		position.add(direction.mult(enemyBulletVelocity).mult(deltaTime));
+		position.add(velocity);
 		
 
 	}

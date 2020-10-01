@@ -4,7 +4,7 @@ float playerBulletSpawnCd = 350; //1000 == 1 second
 float playerBulletTime = 500;
 
 class PlayerBullet {
-	PVector position, direction, mousePosition;
+	PVector position, direction, velocity, mousePosition;
 	int playerBulletVelocity = 500;
 	int size = playerBulletSize;
 	boolean isRendered = true;
@@ -16,6 +16,7 @@ class PlayerBullet {
 	PlayerBullet(float x, float y) {
 		position = new PVector(x, y);
 		direction = new PVector(0, 0);
+		velocity = new PVector(0, 0);
 
 		mousePosition = new PVector(0, 0);
 		mousePosition.x = (mouseX);
@@ -23,12 +24,13 @@ class PlayerBullet {
 
 		direction.x = ((mousePosition.x - position.x));	
 		direction.y = ((mousePosition.y - position.y));
+		direction.normalize();
+		velocity = direction.mult(playerBulletVelocity).mult(deltaTime);
 	}
 
 
 	void update() {
-		direction.normalize();
-		position.add(direction.mult(playerBulletVelocity).mult(deltaTime));
+		position.add(velocity);
 		offScreenDeactivation();
 		borderBounce();
 		Collision();
