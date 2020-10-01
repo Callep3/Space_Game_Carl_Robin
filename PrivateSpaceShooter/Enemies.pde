@@ -1,7 +1,7 @@
 Enemies[] enemies;
 int enemySize = 20;
 float enemySpeed = 50.0;
-float enemySpawnCd = 2000; //1000 == 1 second
+float enemySpawnCd = 100; //1000 == 1 second
 
 public class Enemies {
 	PVector direction, position, velocity;
@@ -11,10 +11,21 @@ public class Enemies {
 	float bulletTime = enemyBulletTime;
 	float bulletSpawnCd = enemyBulletSpawnCd;
 
-	public Enemies(float x, float y) {
+	public Enemies(float x, float y, int spawnSide) {
 		position = new PVector(x, y);
 
-		direction = new PVector(width/2 - position.x, height/2 - position.y).normalize();
+		if (spawnSide == 0 || spawnSide == 7) {
+			direction = new PVector((width/2 - enemySize) - position.x, (height/2 - enemySize) - position.y).normalize();
+		}
+		if (spawnSide == 1 || spawnSide == 2) {
+			direction = new PVector((width/2 + enemySize) - position.x, (height/2 - enemySize) - position.y).normalize();
+		}
+		if (spawnSide == 3 || spawnSide == 4) {
+			direction = new PVector((width/2 + enemySize) - position.x, (height/2 + enemySize) - position.y).normalize();
+		}
+		if (spawnSide == 5 || spawnSide == 6) {
+			direction = new PVector((width/2 - enemySize) - position.x, (height/2 + enemySize) - position.y).normalize();
+		}
 
 		velocity = new PVector(direction.x, direction.y);
 		velocity.x = velocity.x * enemySpeed;

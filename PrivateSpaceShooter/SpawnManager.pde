@@ -10,25 +10,39 @@ public class SpawnManager {
 				enemySpawnCd -= 5;
 			}
 
-			int spawnSide = int(random(0, 4));
+			println(frameRate);
+
+			int spawnSide = int(random(0, 8));
 			PVector spawnLocation;
-			spawnLocation = new PVector(random(30, width - 30), -enemySize);
+			spawnLocation = new PVector(0, -enemySize);
 			switch (spawnSide) {
-				case 0: //top
-					spawnLocation = new PVector(random(30, width - 30), -enemySize);
+				case 0: //top left
+					spawnLocation = new PVector(random(-enemySize, width/2 - enemySize), -enemySize);
 					break;	
-				case 1: //bottom
-					spawnLocation = new PVector(random(30, width - 30), height + enemySize);
+				case 1: //top right
+					spawnLocation = new PVector(random(width/2 + enemySize, width + enemySize), -enemySize);
 					break;	
-				case 2: //left
-					spawnLocation = new PVector(-enemySize, random(30, height - 30));
+				case 2: //right top
+					spawnLocation = new PVector(width + enemySize, random(-enemySize, height/2 - enemySize));
 					break;	
-				case 3: //right
-					spawnLocation = new PVector(width + enemySize, random(30, height - 30));
+				case 3: //right bottom
+					spawnLocation = new PVector(width + enemySize, random(height/2 + enemySize, height + enemySize));
+					break;	
+				case 4: //bottom right
+					spawnLocation = new PVector(random(width/2 + enemySize, width + enemySize), height + enemySize);
+					break;	
+				case 5: //bottom left
+					spawnLocation = new PVector(random(-enemySize, width/2 - enemySize), height + enemySize);
+					break;	
+				case 6: //left bottom
+					spawnLocation = new PVector(-enemySize, random(height/2 + enemySize, height + enemySize));
+					break;	
+				case 7: //bottom right
+					spawnLocation = new PVector(-enemySize, random(-enemySize, height/2 - enemySize));
 					break;	
 			}
 
-			Enemies enemySpawn = new Enemies(spawnLocation.x, spawnLocation.y);
+			Enemies enemySpawn = new Enemies(spawnLocation.x, spawnLocation.y, spawnSide);
 			enemies = (Enemies[]) append(enemies, enemySpawn);
 		}
 
