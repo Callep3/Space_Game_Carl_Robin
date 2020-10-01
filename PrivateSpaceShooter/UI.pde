@@ -85,5 +85,38 @@ class UserInterface {
 			text("Game Over!", width/2, height/3);
 			textSize(36);
 			text("You got a score of " + score + " and survived for " + timeAlive + " seconds!", width/2, height/2.5);
+      highScore();
 	}
+
+  void highScore() {
+    
+    File file = new File("data/highScore.txt");
+    if(file.length() == 0) {
+        String newHighScore = str(0);
+        String[] highScore = split(newHighScore, ' ');
+        saveStrings("data/highScore.txt", highScore);
+    }
+    
+    String[] currentHighScore = loadStrings("data/highScore.txt");
+    if(currentHighScore != null) {
+      int HighScore = 0;
+      
+      for(int i = 0; i < currentHighScore.length; i++) {
+         HighScore = Integer.parseInt(currentHighScore[i]);
+      }
+      
+      if(HighScore > score) {
+        textSize(48);
+        text("High score: " + HighScore, width/2, height/1.5);
+      }
+      
+      if(score > HighScore) {
+        String newHighScore = str(score);
+        String[] highScore = split(newHighScore, ' ');
+        saveStrings("data/highScore.txt", highScore);
+        textSize(48);
+        text("You got a new high score!", width/2, height/1.5);
+      }
+    }
+  }
 }
