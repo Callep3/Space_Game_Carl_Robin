@@ -41,8 +41,20 @@ public class Shields {
 									topLftShield += 1;
 								}
 								if (playerBullets[i].xBounce == true && playerBullets[i].yBounce == true) {
-									playerBullets[i].direction.x *= -1;
-									playerBullets[i].direction.y *= -1;
+									PVector base1 = new PVector(lftShieldPoint, middleShieldPointHeight);
+									PVector base2 = new PVector(middleShieldPointWidth, topShieldPoint);
+									PVector baseDelta = PVector.sub(base2, base1);
+									baseDelta.normalize();
+									PVector normal = new PVector(-baseDelta.y, baseDelta.x);
+
+									PVector incidence = PVector.mult(playerBullets[i].velocity, -1);
+									incidence.normalize();
+
+									float dot = incidence.dot(normal);
+
+									playerBullets[i].velocity.set(2*normal.x*dot - incidence.x, 2*normal.y*dot - incidence.y, 0);
+									playerBullets[i].velocity.mult(playerBullets[i].playerBulletVelocity).mult(deltaTime);
+
 									playerBullets[i].xBounce = false;
 									playerBullets[i].yBounce = false;
 								}
@@ -70,8 +82,20 @@ public class Shields {
 									topRgtShield += 1;
 								}
 								if (playerBullets[i].xBounce == true && playerBullets[i].yBounce == true) {
-									playerBullets[i].direction.x *= -1;
-									playerBullets[i].direction.y *= -1;
+									PVector base1 = new PVector(middleShieldPointWidth, topShieldPoint);
+									PVector base2 = new PVector(rgtShieldPoint, middleShieldPointHeight);
+									PVector baseDelta = PVector.sub(base2, base1);
+									baseDelta.normalize();
+									PVector normal = new PVector(-baseDelta.y, baseDelta.x);
+
+									PVector incidence = PVector.mult(playerBullets[i].velocity, -1);
+									incidence.normalize();
+
+									float dot = incidence.dot(normal);
+
+									playerBullets[i].velocity.set(2*normal.x*dot - incidence.x, 2*normal.y*dot - incidence.y, 0);
+									playerBullets[i].velocity.mult(playerBullets[i].playerBulletVelocity).mult(deltaTime);
+
 									playerBullets[i].xBounce = false;
 									playerBullets[i].yBounce = false;
 								}
@@ -99,8 +123,20 @@ public class Shields {
 									btmLftShield += 1;
 								}
 								if (playerBullets[i].xBounce == true && playerBullets[i].yBounce == true) {
-									playerBullets[i].direction.x *= -1;
-									playerBullets[i].direction.y *= -1;
+									PVector base1 = new PVector(middleShieldPointWidth, btmShieldPoint);
+									PVector base2 = new PVector(lftShieldPoint, middleShieldPointHeight);
+									PVector baseDelta = PVector.sub(base2, base1);
+									baseDelta.normalize();
+									PVector normal = new PVector(-baseDelta.y, baseDelta.x);
+
+									PVector incidence = PVector.mult(playerBullets[i].velocity, -1);
+									incidence.normalize();
+
+									float dot = incidence.dot(normal);
+
+									playerBullets[i].velocity.set(2*normal.x*dot - incidence.x, 2*normal.y*dot - incidence.y, 0);
+									playerBullets[i].velocity.mult(playerBullets[i].playerBulletVelocity).mult(deltaTime);
+
 									playerBullets[i].xBounce = false;
 									playerBullets[i].yBounce = false;
 								}
@@ -128,8 +164,20 @@ public class Shields {
 									btmRgtShield += 1;
 								}
 								if (playerBullets[i].xBounce == true && playerBullets[i].yBounce == true) {
-									playerBullets[i].direction.x *= -1;
-									playerBullets[i].direction.y *= -1;
+									PVector base1 = new PVector(rgtShieldPoint, middleShieldPointHeight);
+									PVector base2 = new PVector(middleShieldPointWidth, btmShieldPoint);
+									PVector baseDelta = PVector.sub(base2, base1);
+									baseDelta.normalize();
+									PVector normal = new PVector(-baseDelta.y, baseDelta.x);
+
+									PVector incidence = PVector.mult(playerBullets[i].velocity, -1);
+									incidence.normalize();
+
+									float dot = incidence.dot(normal);
+
+									playerBullets[i].velocity.set(2*normal.x*dot - incidence.x, 2*normal.y*dot - incidence.y, 0);
+									playerBullets[i].velocity.mult(playerBullets[i].playerBulletVelocity).mult(deltaTime);
+
 									playerBullets[i].xBounce = false;
 									playerBullets[i].yBounce = false;
 								}

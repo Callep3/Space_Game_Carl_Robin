@@ -6,9 +6,11 @@ public class SpawnManager {
 	void update() {
 		if (spawnTime < time) {
 			spawnTime = time + enemySpawnCd;
-			if (enemySpawnCd > 500) {
+			if (enemySpawnCd > 750) {
 				enemySpawnCd -= 5;
 			}
+
+			println("enemySpawnCd: "+enemySpawnCd);
 
 			println(frameRate);
 
