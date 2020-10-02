@@ -1,3 +1,5 @@
+//Author: Carl & Lindevy
+
 float deltaTime = 0;
 float time = 0;
 

@@ -1,3 +1,5 @@
+//Author: Lindevy
+
 int score = 0;
 int timeAlive;
 boolean startGame;

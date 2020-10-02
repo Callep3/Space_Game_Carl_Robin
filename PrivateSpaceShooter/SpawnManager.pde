@@ -1,3 +1,5 @@
+//Author: Carl
+
 public class SpawnManager {
 	//1000 == 1 second before something spawns when the game starts
 	float spawnTime = 2000;
@@ -5,18 +7,16 @@ public class SpawnManager {
 
 	void update() {
 		if (spawnTime < time) {
-			spawnTime = time + enemySpawnCd;
-			if (enemySpawnCd > 750) {
-				enemySpawnCd -= 5;
+			spawnTime = time + enemySpawnCooldown;
+			if (enemySpawnCooldown > 750) {
+				enemySpawnCooldown -= 5;
 			}
 
-			println("enemySpawnCd: "+enemySpawnCd);
-
-			println(frameRate);
-
 			int spawnSide = int(random(0, 8));
+
 			PVector spawnLocation;
 			spawnLocation = new PVector(0, -enemySize);
+
 			switch (spawnSide) {
 				case 0: //top left
 					spawnLocation = new PVector(random(-enemySize, width/2 - enemySize), -enemySize);
@@ -39,9 +39,9 @@ public class SpawnManager {
 				case 6: //left bottom
 					spawnLocation = new PVector(-enemySize, random(height/2 + enemySize, height + enemySize));
 					break;	
-				case 7: //bottom right
+				case 7: //left top
 					spawnLocation = new PVector(-enemySize, random(-enemySize, height/2 - enemySize));
-					break;	
+					break;
 			}
 
 			Enemy enemySpawn = new Enemy(spawnLocation.x, spawnLocation.y, spawnSide);
@@ -50,23 +50,10 @@ public class SpawnManager {
 
 		//PlayerBullets
 		if (playerBulletTime < time && mouseHeld) {
-			playerBulletTime = time + playerBulletSpawnCd;
+			playerBulletTime = time + playerBulletSpawnCooldown;
 
 			PlayerBullet bulletSpawn = new PlayerBullet(player.position.x, player.position.y);
 			playerBullets = (PlayerBullet[]) append(playerBullets, bulletSpawn);
-		}
-
-		//EnemyBullets
-		for (int i = 0; i < enemies.length; ++i) {
-			if(enemies[i].isRendered) {
-				if (enemies[i].bulletTime < time) {
-				enemies[i].bulletTime = time + enemies[i].bulletSpawnCd;
-
-				EnemyBullet enemyBullet = new EnemyBullet(enemies[i].position.x, enemies[i].position.y);
-				enemyBullets = (EnemyBullet[]) append(enemyBullets, enemyBullet);
-				}
-			}
-			
 		}
 	}
 }

@@ -1,7 +1,9 @@
+//Author: Lindevy
+
 PlayerBullet[] playerBullets;
 int playerBulletSize = 10;
 
-float playerBulletSpawnCd = 350; //1000 == 1 second
+float playerBulletSpawnCooldown = 350; //1000 == 1 second
 float playerBulletTime = 500;
 
 class PlayerBullet {

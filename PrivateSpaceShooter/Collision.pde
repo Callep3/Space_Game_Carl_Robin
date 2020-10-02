@@ -1,4 +1,7 @@
-public class Collision { 
+//Author: 70% Carl & 30% Lindevy
+
+public class Collision {
+	//Round collision
 	boolean playerBulletEnemyCollision(PlayerBullet one, Enemy two) {
 		float maxDistance = (one.size + two.size) / 2;
 
@@ -17,6 +20,7 @@ public class Collision {
 		}
 	}
 
+	//Round collision
 	boolean playerBulletNexusCollision(PlayerBullet one, Nexus two) {
 		float maxDistance = (one.size + two.size) / 2;
 
@@ -35,6 +39,7 @@ public class Collision {
 		}
 	}
 
+	//Round collision
 	boolean enemyNexusCollision(Enemy one, Nexus two) {
 		float maxDistance = (one.size + two.size) / 2;
 
@@ -52,7 +57,8 @@ public class Collision {
 			return true;
 		}
 	}
-	
+
+	//Round collision
 	boolean enemyBulletNexusCollision(EnemyBullet one, Nexus two) {
 		float maxDistance = (one.size + two.size) / 2;
 
@@ -71,6 +77,8 @@ public class Collision {
 		}
 	}
 
+	//Below here are collision taken from google (since we didn't go through trigonometry)
+	//Diagonal-Round collision
 	boolean enemyShieldsCollision(Enemy one, float x1, float y1, float x2, float y2) {
 		float cx = one.position.x;
 		float cy = one.position.y;
@@ -106,6 +114,7 @@ public class Collision {
 		return false;
 	}
 
+	//Diagonal-Round collision
 	boolean enemyBulletShieldsCollision(EnemyBullet one, float x1, float y1, float x2, float y2) {
 		float cx = one.position.x;
 		float cy = one.position.y;
@@ -141,6 +150,7 @@ public class Collision {
 		return false;
 	}
 
+	//Diagonal-Round collision
 	boolean playerBulletShieldsCollision(PlayerBullet one, float x1, float y1, float x2, float y2) {
 		float cx = one.position.x;
 		float cy = one.position.y;
@@ -176,6 +186,7 @@ public class Collision {
 		return false;
 	}
 
+	//Point-Round collision
 	boolean pointCircle(float px, float py, float cx, float cy, float r) {
 		float distX = px - cx;
 		float distY = py - cy;
@@ -187,6 +198,7 @@ public class Collision {
 		return false;
 	}
 
+	//Line-Point collision
 	boolean linePoint(float x1, float y1, float x2, float y2, float px, float py) {
 		float d1 = dist(px,py, x1,y1);
 		float d2 = dist(px,py, x2,y2);

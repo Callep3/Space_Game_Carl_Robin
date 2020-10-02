@@ -1,3 +1,5 @@
+//Author: Carl & Lindevy
+
 //Classes
 World world;
 Nexus nexus;
@@ -7,6 +9,7 @@ SpawnManager spawnManager;
 Collision collision;
 Shields shields;
 UserInterface userInterface;
+GameRunning gameRunning;
 PImage backgroundImage;
 PImage nexusImage;
 
@@ -14,6 +17,7 @@ PImage nexusImage;
 void setup() {
 	backgroundImage = loadImage("background.PNG");
 	nexusImage = loadImage("nexus.PNG");
+
 	world = new World();
 	nexus = new Nexus();
 	myTime = new Time();
@@ -21,58 +25,23 @@ void setup() {
 	collision = new Collision();
 	shields = new Shields();
 	userInterface = new UserInterface();
+	gameRunning = new GameRunning();
 
 	enemies = new Enemy[0];
 	playerBullets = new PlayerBullet[0];
 	enemyBullets = new EnemyBullet[0];
-	player = new Player(width / 4, height / 4);
+	player = new Player(0, 0);
 
-	size(1920, 1014);
-	surface.setLocation(-0, 0);
+	size(1920, 1000);
 	shields.setup();
 }
 
+
 void draw() {
 	if(startGame && nexusHealth > 0) {
-		myTime.deltaTime();
-
-		world.worldCreation();
-		nexus.draw();
-
-		for(int i = 0; i < playerBullets.length; i++) {
-			if (playerBullets[i].isRendered) {
-				playerBullets[i].update();
-				playerBullets[i].draw();
-				playerBullets[i].offScreenDeactivation(i);
-				playerBullets[i].borderBounce(i);
-				nexus.playerBulletCollision(i);
-			}
-		}
-
-		for (int i = 0; i < enemyBullets.length; ++i) {
-			if(enemyBullets[i].isRendered) {
-				enemyBullets[i].update();
-				enemyBullets[i].draw();
-				nexus.enemyBulletCollision(i);
-			}
-		}
-
-		for (int i = 0; i < enemies.length; ++i) {
-			if (enemies[i].isRendered) {
-				enemies[i].update();
-				enemies[i].draw();
-				nexus.enemyCollision(i);
-			}
-		}
-
-		userInterface.update();
-		userInterface.draw();
-		player.update();
-		player.draw();
-		spawnManager.update();
-		shields.update();
-		shields.draw();
+		gameRunning.update();
 	}
+
 	if(!startGame) {
 		userInterface.startMenu();
 	}

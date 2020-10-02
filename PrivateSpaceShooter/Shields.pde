@@ -1,192 +1,31 @@
-int topLftShield, topRgtShield, btmLftShield, btmRgtShield;
+//Author: Carl
+
+int topLeftShieldHp, topRightShieldHp, bottomLeftShieldHp, bottomRightShieldHp;
 int shieldMaxHealth = 1;
 
 public class Shields {
-	float lftShieldPoint = width/2-150;
-	float rgtShieldPoint = width/2+150;
+	float leftShieldPoint = width/2-150;
+	float rightShieldPoint = width/2+150;
 	float topShieldPoint = height/2-150;
-	float btmShieldPoint = height/2+150;
+	float bottomShieldPoint = height/2+150;
 	float middleShieldPointHeight = height/2;
 	float middleShieldPointWidth = width/2;
 	int numberOfShields = 4;
 
+
 	void setup() {
-		topLftShield = shieldMaxHealth;
-		topRgtShield = shieldMaxHealth;
-		btmLftShield = shieldMaxHealth;
-		btmRgtShield = shieldMaxHealth;
+		topLeftShieldHp = shieldMaxHealth;
+		topRightShieldHp = shieldMaxHealth;
+		bottomLeftShieldHp = shieldMaxHealth;
+		bottomRightShieldHp = shieldMaxHealth;
 	}
 
+
 	void update() {
-		
-		for (int n = 0; n < numberOfShields; ++n) {
-			switch (n) {
-				case 0:
-					if (topLftShield > 0) {
-						for (int i = 0; i < enemies.length; ++i) {
-							if (collision.enemyShieldsCollision(enemies[i], lftShieldPoint, middleShieldPointHeight, middleShieldPointWidth, topShieldPoint) && enemies[i].isRendered) {
-								enemies[i].isRendered = false;
-								topLftShield -= 1;
-							}
-						}
-						for (int i = 0; i < enemyBullets.length; ++i) {
-							if (collision.enemyBulletShieldsCollision(enemyBullets[i], lftShieldPoint, middleShieldPointHeight, middleShieldPointWidth, topShieldPoint) && enemyBullets[i].isRendered) {
-								enemyBullets[i].isRendered = false;
-								topLftShield -= 1;
-							}
-						}
-						for (int i = 0; i < playerBullets.length; ++i) {
-							if (collision.playerBulletShieldsCollision(playerBullets[i], lftShieldPoint, middleShieldPointHeight, middleShieldPointWidth, topShieldPoint) && playerBullets[i].isRendered) {
-								if (topLftShield < shieldMaxHealth) {
-									topLftShield += 1;
-								}
-								if (playerBullets[i].xBounce == true && playerBullets[i].yBounce == true) {
-									PVector base1 = new PVector(lftShieldPoint, middleShieldPointHeight);
-									PVector base2 = new PVector(middleShieldPointWidth, topShieldPoint);
-									PVector baseDelta = PVector.sub(base2, base1);
-									baseDelta.normalize();
-									PVector normal = new PVector(-baseDelta.y, baseDelta.x);
-
-									PVector incidence = PVector.mult(playerBullets[i].velocity, -1);
-									incidence.normalize();
-
-									float dot = incidence.dot(normal);
-
-									playerBullets[i].velocity.set(2*normal.x*dot - incidence.x, 2*normal.y*dot - incidence.y, 0);
-									playerBullets[i].velocity.mult(playerBullets[i].playerBulletSpeed).mult(deltaTime);
-
-									playerBullets[i].xBounce = false;
-									playerBullets[i].yBounce = false;
-								}
-							}
-						}
-					}
-					break;
-				case 1:
-					if (topRgtShield > 0) {
-						for (int i = 0; i < enemies.length; ++i) {
-							if (collision.enemyShieldsCollision(enemies[i], middleShieldPointWidth, topShieldPoint, rgtShieldPoint, middleShieldPointHeight) && enemies[i].isRendered) {
-								enemies[i].isRendered = false;
-								topRgtShield -= 1;
-							}
-						}
-						for (int i = 0; i < enemyBullets.length; ++i) {
-							if (collision.enemyBulletShieldsCollision(enemyBullets[i], middleShieldPointWidth, topShieldPoint, rgtShieldPoint, middleShieldPointHeight) && enemyBullets[i].isRendered) {
-								enemyBullets[i].isRendered = false;
-								topRgtShield -= 1;
-							}
-						}
-						for (int i = 0; i < playerBullets.length; ++i) {
-							if (collision.playerBulletShieldsCollision(playerBullets[i], middleShieldPointWidth, topShieldPoint, rgtShieldPoint, middleShieldPointHeight) && playerBullets[i].isRendered) {
-								if (topRgtShield < shieldMaxHealth) {
-									topRgtShield += 1;
-								}
-								if (playerBullets[i].xBounce == true && playerBullets[i].yBounce == true) {
-									PVector base1 = new PVector(middleShieldPointWidth, topShieldPoint);
-									PVector base2 = new PVector(rgtShieldPoint, middleShieldPointHeight);
-									PVector baseDelta = PVector.sub(base2, base1);
-									baseDelta.normalize();
-									PVector normal = new PVector(-baseDelta.y, baseDelta.x);
-
-									PVector incidence = PVector.mult(playerBullets[i].velocity, -1);
-									incidence.normalize();
-
-									float dot = incidence.dot(normal);
-
-									playerBullets[i].velocity.set(2*normal.x*dot - incidence.x, 2*normal.y*dot - incidence.y, 0);
-									playerBullets[i].velocity.mult(playerBullets[i].playerBulletSpeed).mult(deltaTime);
-
-									playerBullets[i].xBounce = false;
-									playerBullets[i].yBounce = false;
-								}
-							}
-						}
-					}
-					break;
-				case 2:
-					if (btmLftShield > 0) {
-						for (int i = 0; i < enemies.length; ++i) {
-							if (collision.enemyShieldsCollision(enemies[i], middleShieldPointWidth, btmShieldPoint, lftShieldPoint, middleShieldPointHeight) && enemies[i].isRendered) {
-								enemies[i].isRendered = false;
-								btmLftShield -= 1;
-							}
-						}
-						for (int i = 0; i < enemyBullets.length; ++i) {
-							if (collision.enemyBulletShieldsCollision(enemyBullets[i], middleShieldPointWidth, btmShieldPoint, lftShieldPoint, middleShieldPointHeight) && enemyBullets[i].isRendered) {
-								enemyBullets[i].isRendered = false;
-								btmLftShield -= 1;
-							}
-						}
-						for (int i = 0; i < playerBullets.length; ++i) {
-							if (collision.playerBulletShieldsCollision(playerBullets[i], middleShieldPointWidth, btmShieldPoint, lftShieldPoint, middleShieldPointHeight) && playerBullets[i].isRendered) {
-								if (btmLftShield < shieldMaxHealth) {
-									btmLftShield += 1;
-								}
-								if (playerBullets[i].xBounce == true && playerBullets[i].yBounce == true) {
-									PVector base1 = new PVector(middleShieldPointWidth, btmShieldPoint);
-									PVector base2 = new PVector(lftShieldPoint, middleShieldPointHeight);
-									PVector baseDelta = PVector.sub(base2, base1);
-									baseDelta.normalize();
-									PVector normal = new PVector(-baseDelta.y, baseDelta.x);
-
-									PVector incidence = PVector.mult(playerBullets[i].velocity, -1);
-									incidence.normalize();
-
-									float dot = incidence.dot(normal);
-
-									playerBullets[i].velocity.set(2*normal.x*dot - incidence.x, 2*normal.y*dot - incidence.y, 0);
-									playerBullets[i].velocity.mult(playerBullets[i].playerBulletSpeed).mult(deltaTime);
-
-									playerBullets[i].xBounce = false;
-									playerBullets[i].yBounce = false;
-								}
-							}
-						}
-					}
-					break;
-				case 3:
-					if (btmRgtShield > 0) {
-						for (int i = 0; i < enemies.length; ++i) {
-							if (collision.enemyShieldsCollision(enemies[i], rgtShieldPoint, middleShieldPointHeight, middleShieldPointWidth, btmShieldPoint) && enemies[i].isRendered) {
-								enemies[i].isRendered = false;
-								btmRgtShield -= 1;
-							}
-						}
-						for (int i = 0; i < enemyBullets.length; ++i) {
-							if (collision.enemyBulletShieldsCollision(enemyBullets[i], rgtShieldPoint, middleShieldPointHeight, middleShieldPointWidth, btmShieldPoint) && enemyBullets[i].isRendered) {
-								enemyBullets[i].isRendered = false;
-								btmRgtShield -= 1;
-							}
-						}
-						for (int i = 0; i < playerBullets.length; ++i) {
-							if (collision.playerBulletShieldsCollision(playerBullets[i], rgtShieldPoint, middleShieldPointHeight, middleShieldPointWidth, btmShieldPoint) && playerBullets[i].isRendered) {
-								if (btmRgtShield < shieldMaxHealth) {
-									btmRgtShield += 1;
-								}
-								if (playerBullets[i].xBounce == true && playerBullets[i].yBounce == true) {
-									PVector base1 = new PVector(rgtShieldPoint, middleShieldPointHeight);
-									PVector base2 = new PVector(middleShieldPointWidth, btmShieldPoint);
-									PVector baseDelta = PVector.sub(base2, base1);
-									baseDelta.normalize();
-									PVector normal = new PVector(-baseDelta.y, baseDelta.x);
-
-									PVector incidence = PVector.mult(playerBullets[i].velocity, -1);
-									incidence.normalize();
-
-									float dot = incidence.dot(normal);
-
-									playerBullets[i].velocity.set(2*normal.x*dot - incidence.x, 2*normal.y*dot - incidence.y, 0);
-									playerBullets[i].velocity.mult(playerBullets[i].playerBulletSpeed).mult(deltaTime);
-
-									playerBullets[i].xBounce = false;
-									playerBullets[i].yBounce = false;
-								}
-							}
-						}
-					}
-					break;
-			}
-		}
+		topLeftShield();
+		topRightShield();
+		bottomLeftShield();
+		bottomRightShield();
 	}
 	
 
@@ -196,24 +35,201 @@ public class Shields {
 		fill(20, 230, 151);
 		textSize(25);
 		textAlign(CENTER);
-		if (topLftShield > 0) {
-			line(lftShieldPoint, middleShieldPointHeight, middleShieldPointWidth, topShieldPoint);
-			text(topLftShield, width/2-95, height/2-85);
+		if (topLeftShieldHp > 0) {
+			line(leftShieldPoint, middleShieldPointHeight, middleShieldPointWidth, topShieldPoint);
+			text(topLeftShieldHp, width/2-95, height/2-85);
 		}
-		if (topRgtShield > 0) {
-			line(middleShieldPointWidth, topShieldPoint, rgtShieldPoint, middleShieldPointHeight);
-			text(topRgtShield, width/2+95, height/2-85);
+		if (topRightShieldHp > 0) {
+			line(middleShieldPointWidth, topShieldPoint, rightShieldPoint, middleShieldPointHeight);
+			text(topRightShieldHp, width/2+95, height/2-85);
 		}
-		if (btmLftShield > 0) {
-			line(middleShieldPointWidth, btmShieldPoint, lftShieldPoint, middleShieldPointHeight);
-			text(btmLftShield, width/2-95, height/2+95);
+		if (bottomLeftShieldHp > 0) {
+			line(middleShieldPointWidth, bottomShieldPoint, leftShieldPoint, middleShieldPointHeight);
+			text(bottomLeftShieldHp, width/2-95, height/2+95);
 		}
-		if (btmRgtShield > 0) {
-			line(rgtShieldPoint, middleShieldPointHeight, middleShieldPointWidth, btmShieldPoint);
-			text(btmRgtShield, width/2+95, height/2+95);
+		if (bottomRightShieldHp > 0) {
+			line(rightShieldPoint, middleShieldPointHeight, middleShieldPointWidth, bottomShieldPoint);
+			text(bottomRightShieldHp, width/2+95, height/2+95);
 		}
 		
 		//Reset stroke color
 		stroke(0);
+	}
+
+
+	void topLeftShield() {
+		if (topLeftShieldHp > 0) {
+			for (int i = 0; i < enemies.length; ++i) {
+				if (collision.enemyShieldsCollision(enemies[i], leftShieldPoint, middleShieldPointHeight, middleShieldPointWidth, topShieldPoint) && enemies[i].isRendered) {
+					enemies[i].isRendered = false;
+					topLeftShieldHp -= 1;
+				}
+			}
+			for (int i = 0; i < enemyBullets.length; ++i) {
+				if (collision.enemyBulletShieldsCollision(enemyBullets[i], leftShieldPoint, middleShieldPointHeight, middleShieldPointWidth, topShieldPoint) && enemyBullets[i].isRendered) {
+					enemyBullets[i].isRendered = false;
+					topLeftShieldHp -= 1;
+				}
+			}
+			for (int i = 0; i < playerBullets.length; ++i) {
+				if (collision.playerBulletShieldsCollision(playerBullets[i], leftShieldPoint, middleShieldPointHeight, middleShieldPointWidth, topShieldPoint) && playerBullets[i].isRendered) {
+					if (topLeftShieldHp < shieldMaxHealth) {
+						topLeftShieldHp += 1;
+					}
+					if (playerBullets[i].xBounce == true && playerBullets[i].yBounce == true) {
+						//Calculation to determine the angle of which the ball should bounce of the shield (Did not do this myself (Thank god for google))
+						PVector base1 = new PVector(leftShieldPoint, middleShieldPointHeight);
+						PVector base2 = new PVector(middleShieldPointWidth, topShieldPoint);
+						PVector baseDelta = PVector.sub(base2, base1);
+						baseDelta.normalize();
+
+						PVector normal = new PVector(-baseDelta.y, baseDelta.x);
+
+						PVector incidence = PVector.mult(playerBullets[i].velocity, -1);
+						incidence.normalize();
+
+						float dot = incidence.dot(normal);
+
+						playerBullets[i].velocity.set(2*normal.x*dot - incidence.x, 2*normal.y*dot - incidence.y, 0);
+						playerBullets[i].velocity.mult(playerBullets[i].playerBulletSpeed).mult(deltaTime);
+
+						playerBullets[i].xBounce = false;
+						playerBullets[i].yBounce = false;
+					}
+				}
+			}
+		}
+	}
+
+
+	void topRightShield() {
+		if (topRightShieldHp > 0) {
+			for (int i = 0; i < enemies.length; ++i) {
+				if (collision.enemyShieldsCollision(enemies[i], middleShieldPointWidth, topShieldPoint, rightShieldPoint, middleShieldPointHeight) && enemies[i].isRendered) {
+					enemies[i].isRendered = false;
+					topRightShieldHp -= 1;
+				}
+			}
+			for (int i = 0; i < enemyBullets.length; ++i) {
+				if (collision.enemyBulletShieldsCollision(enemyBullets[i], middleShieldPointWidth, topShieldPoint, rightShieldPoint, middleShieldPointHeight) && enemyBullets[i].isRendered) {
+					enemyBullets[i].isRendered = false;
+					topRightShieldHp -= 1;
+				}
+			}
+			for (int i = 0; i < playerBullets.length; ++i) {
+				if (collision.playerBulletShieldsCollision(playerBullets[i], middleShieldPointWidth, topShieldPoint, rightShieldPoint, middleShieldPointHeight) && playerBullets[i].isRendered) {
+					if (topRightShieldHp < shieldMaxHealth) {
+						topRightShieldHp += 1;
+					}
+					if (playerBullets[i].xBounce == true && playerBullets[i].yBounce == true) {
+						//Calculation to determine the angle of which the ball should bounce of the shield (Did not do this myself (Thank god for google))
+						PVector base1 = new PVector(middleShieldPointWidth, topShieldPoint);
+						PVector base2 = new PVector(rightShieldPoint, middleShieldPointHeight);
+						PVector baseDelta = PVector.sub(base2, base1);
+						baseDelta.normalize();
+						PVector normal = new PVector(-baseDelta.y, baseDelta.x);
+
+						PVector incidence = PVector.mult(playerBullets[i].velocity, -1);
+						incidence.normalize();
+
+						float dot = incidence.dot(normal);
+
+						playerBullets[i].velocity.set(2*normal.x*dot - incidence.x, 2*normal.y*dot - incidence.y, 0);
+						playerBullets[i].velocity.mult(playerBullets[i].playerBulletSpeed).mult(deltaTime);
+
+						playerBullets[i].xBounce = false;
+						playerBullets[i].yBounce = false;
+					}
+				}
+			}
+		}
+	}
+
+
+	void bottomLeftShield() {
+		if (bottomLeftShieldHp > 0) {
+			for (int i = 0; i < enemies.length; ++i) {
+				if (collision.enemyShieldsCollision(enemies[i], middleShieldPointWidth, bottomShieldPoint, leftShieldPoint, middleShieldPointHeight) && enemies[i].isRendered) {
+					enemies[i].isRendered = false;
+					bottomLeftShieldHp -= 1;
+				}
+			}
+			for (int i = 0; i < enemyBullets.length; ++i) {
+				if (collision.enemyBulletShieldsCollision(enemyBullets[i], middleShieldPointWidth, bottomShieldPoint, leftShieldPoint, middleShieldPointHeight) && enemyBullets[i].isRendered) {
+					enemyBullets[i].isRendered = false;
+					bottomLeftShieldHp -= 1;
+				}
+			}
+			for (int i = 0; i < playerBullets.length; ++i) {
+				if (collision.playerBulletShieldsCollision(playerBullets[i], middleShieldPointWidth, bottomShieldPoint, leftShieldPoint, middleShieldPointHeight) && playerBullets[i].isRendered) {
+					if (bottomLeftShieldHp < shieldMaxHealth) {
+						bottomLeftShieldHp += 1;
+					}
+					if (playerBullets[i].xBounce == true && playerBullets[i].yBounce == true) {
+						//Calculation to determine the angle of which the ball should bounce of the shield (Did not do this myself (Thank god for google))
+						PVector base1 = new PVector(middleShieldPointWidth, bottomShieldPoint);
+						PVector base2 = new PVector(leftShieldPoint, middleShieldPointHeight);
+						PVector baseDelta = PVector.sub(base2, base1);
+						baseDelta.normalize();
+						PVector normal = new PVector(-baseDelta.y, baseDelta.x);
+
+						PVector incidence = PVector.mult(playerBullets[i].velocity, -1);
+						incidence.normalize();
+
+						float dot = incidence.dot(normal);
+
+						playerBullets[i].velocity.set(2*normal.x*dot - incidence.x, 2*normal.y*dot - incidence.y, 0);
+						playerBullets[i].velocity.mult(playerBullets[i].playerBulletSpeed).mult(deltaTime);
+
+						playerBullets[i].xBounce = false;
+						playerBullets[i].yBounce = false;
+					}
+				}
+			}
+		}
+	}
+
+
+	void bottomRightShield() {
+		if (bottomRightShieldHp > 0) {
+			for (int i = 0; i < enemies.length; ++i) {
+				if (collision.enemyShieldsCollision(enemies[i], rightShieldPoint, middleShieldPointHeight, middleShieldPointWidth, bottomShieldPoint) && enemies[i].isRendered) {
+					enemies[i].isRendered = false;
+					bottomRightShieldHp -= 1;
+				}
+			}
+			for (int i = 0; i < enemyBullets.length; ++i) {
+				if (collision.enemyBulletShieldsCollision(enemyBullets[i], rightShieldPoint, middleShieldPointHeight, middleShieldPointWidth, bottomShieldPoint) && enemyBullets[i].isRendered) {
+					enemyBullets[i].isRendered = false;
+					bottomRightShieldHp -= 1;
+				}
+			}
+			for (int i = 0; i < playerBullets.length; ++i) {
+				if (collision.playerBulletShieldsCollision(playerBullets[i], rightShieldPoint, middleShieldPointHeight, middleShieldPointWidth, bottomShieldPoint) && playerBullets[i].isRendered) {
+					if (bottomRightShieldHp < shieldMaxHealth) {
+						bottomRightShieldHp += 1;
+					}
+					if (playerBullets[i].xBounce == true && playerBullets[i].yBounce == true) {
+						//Calculation to determine the angle of which the ball should bounce of the shield (Did not do this myself (Thank god for google))
+						PVector base1 = new PVector(rightShieldPoint, middleShieldPointHeight);
+						PVector base2 = new PVector(middleShieldPointWidth, bottomShieldPoint);
+						PVector baseDelta = PVector.sub(base2, base1);
+						baseDelta.normalize();
+						PVector normal = new PVector(-baseDelta.y, baseDelta.x);
+
+						PVector incidence = PVector.mult(playerBullets[i].velocity, -1);
+						incidence.normalize();
+
+						float dot = incidence.dot(normal);
+
+						playerBullets[i].velocity.set(2*normal.x*dot - incidence.x, 2*normal.y*dot - incidence.y, 0);
+						playerBullets[i].velocity.mult(playerBullets[i].playerBulletSpeed).mult(deltaTime);
+
+						playerBullets[i].xBounce = false;
+						playerBullets[i].yBounce = false;
+					}
+				}
+			}
+		}
 	}
 }

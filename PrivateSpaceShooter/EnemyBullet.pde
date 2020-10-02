@@ -1,7 +1,9 @@
+//Author: Lindevy
+
 EnemyBullet[] enemyBullets;
 int enemyBulletSize = 10;
 
-float enemyBulletSpawnCd = 3000; //1000 == 1 second
+float enemyBulletSpawnCooldown = 3000; //1000 == 1 second
 float enemyBulletTime = 500;
 
 class EnemyBullet {
