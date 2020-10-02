@@ -44,8 +44,8 @@ public class SpawnManager {
 					break;	
 			}
 
-			Enemies enemySpawn = new Enemies(spawnLocation.x, spawnLocation.y, spawnSide);
-			enemies = (Enemies[]) append(enemies, enemySpawn);
+			Enemy enemySpawn = new Enemy(spawnLocation.x, spawnLocation.y, spawnSide);
+			enemies = (Enemy[]) append(enemies, enemySpawn);
 		}
 
 		//PlayerBullets
@@ -58,7 +58,7 @@ public class SpawnManager {
 
 		//EnemyBullets
 		for (int i = 0; i < enemies.length; ++i) {
-			if(enemies[i].alive) {
+			if(enemies[i].isRendered) {
 				if (enemies[i].bulletTime < time) {
 				enemies[i].bulletTime = time + enemies[i].bulletSpawnCd;
 

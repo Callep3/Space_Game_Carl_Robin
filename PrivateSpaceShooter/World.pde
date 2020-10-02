@@ -1,33 +1,19 @@
-int borderWidth = 5;
+//Author: Carl & Lindevy
+
+int borderThickness = 5;
 int jumpPointSize = 15;
 int jumpDotSize = 3;
 
 class World {
 	void worldCreation() {
-		//background
 		image(backgroundImage, 0, 0);
 
-
-		//Lines
+		//Border Lines
+		fill(100);
 		strokeWeight(2);
 		rectMode(CENTER);
-		fill(100);
-		rect(width/2, height/2, width, borderWidth);
-		rect(width/2, height/2, borderWidth, height);
-
-
-		//Nexus
-		ellipseMode(CENTER);
-		fill(20, 230, 151);
-		ellipse(width/2, height/2, nexusSize, nexusSize);
-		image(nexusImage, width/2-75, height/2-75);
-
-		//NexusHealth
-		fill(255, 169, 140);
-		textAlign(CENTER);
-		textSize(50);
-		text(nexusHealth, width/2, height/2 + 15);
-
+		rect(width/2, height/2, width, borderThickness);
+		rect(width/2, height/2, borderThickness, height);
 
 		//jumpPoints
 		fill(212, 175, 106);

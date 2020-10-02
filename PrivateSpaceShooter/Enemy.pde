@@ -1,17 +1,17 @@
-Enemies[] enemies;
+Enemy[] enemies;
 int enemySize = 20;
 float enemySpeed = 50.0;
 float enemySpawnCd = 2000; //1000 == 1 second
 
-public class Enemies {
+public class Enemy {
 	PVector direction, position, velocity;
 	int r, g, b;
 	int size;
-	boolean alive = true;
+	boolean isRendered = true;
 	float bulletTime = enemyBulletTime;
 	float bulletSpawnCd = enemyBulletSpawnCd;
 
-	public Enemies(float x, float y, int spawnSide) {
+	public Enemy(float x, float y, int spawnSide) {
 		position = new PVector(x, y);
 
 		if (spawnSide == 0 || spawnSide == 7) {
@@ -60,20 +60,13 @@ public class Enemies {
 
 	void Collision() {
 		for (int i = 0; i < enemies.length; ++i) {
-			if (collision.enemyNexusCollision(enemies[i], nexus) && enemies[i].alive) {
-				enemies[i].alive = false;
-				nexusHealth -= 1;
-			}
-		}
-		for (int i = 0; i < enemies.length; ++i) {
 			for (int j = 0; j < playerBullets.length; ++j) {
-				if (collision.playerBulletEnemyCollision(playerBullets[j], enemies[i]) && enemies[i].alive && playerBullets[j].isRendered) {
-					enemies[i].alive = false;
+				if (collision.playerBulletEnemyCollision(playerBullets[j], enemies[i]) && enemies[i].isRendered && playerBullets[j].isRendered) {
+					enemies[i].isRendered = false;
 					playerBullets[j].isRendered = false;
 					score += 5;
 				}
 			}
-
 		}
 	}
 }

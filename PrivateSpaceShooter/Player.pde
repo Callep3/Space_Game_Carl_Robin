@@ -1,41 +1,47 @@
-int playerSize = 30;
+//Author: Lindevy
+
+int playerSize = 33;
 
 class Player {
-	PVector position, topLeft, topRight, btmLeft, btmRight;
-	boolean topLeftPoint, topRightPoint, btmRightPoint, btmLeftPoint;
+	PVector position, topLeft, topRight, bottomLeft, bottomRight;
+	boolean topLeftPoint, topRightPoint, bottomLeftPoint, bottomRightPoint;
 	float speed = 2500;
 	int size = playerSize;
 
 
 	Player(float x, float y) {
 		topLeft = new PVector(width/4*1.4, height/4);
-		btmLeft = new PVector(width/4*1.4, height/4*3);
+		bottomLeft = new PVector(width/4*1.4, height/4*3);
 		topRight = new PVector(width/4*2.6, height/4);
-		btmRight = new PVector(width/4*2.6, height/4*3);
+		bottomRight = new PVector(width/4*2.6, height/4*3);
+		//Default starting point
 		position = new PVector(topLeft.x, topLeft.y);
 	}
 
 	void update() {
-		movement();
+		positionCheck();
+
+		//Movement
 		if(topLeftPoint) {
-			upperLeft();
+			isUpperLeft();
 		}
 		if(topRightPoint) {
-			upperRight();
+			isUpperRight();
 		}
-		if(btmLeftPoint) {
-			lowerLeft();
+		if(bottomLeftPoint) {
+			isLowerLeft();
 		}
-		if(btmRightPoint) {
-			lowerRight();
+		if(bottomRightPoint) {
+			isLowerRight();
 		}
 	}
 
 
-	void draw() { 
+	void draw() {
+		//Player is UFO
 		fill(200, 252, 234);
 		strokeWeight(1);
-		ellipse(position.x, position.y, size+3, size+3);
+		ellipse(position.x, position.y, size, size);
 		fill(0);
 		ellipse(position.x + 13, position.y, 3, 3);
 		ellipse(position.x - 13, position.y, 3, 3);
@@ -46,176 +52,200 @@ class Player {
 		ellipse(position.x + 9.5, position.y - 9.5, 3, 3);
 		ellipse(position.x - 9.5, position.y - 9.5, 3, 3);
 		fill(20, 230, 151);
-		ellipse(position.x, position.y, size-12, size-12);
+		ellipse(position.x, position.y, size-15, size-15);
 	}
 
 
-	void movement() {
-		//Check at which point the player is currently at.
+	void positionCheck() {
 		if(position.x == topLeft.x && position.y == topLeft.y) {
 			topLeftPoint = true;
 		}
 		if(position.x == topRight.x && position.y == topRight.y) {
 			topRightPoint = true;
 		}
-		if(position.x == btmLeft.x && position.y == btmLeft.y) {
-			btmLeftPoint = true;
+		if(position.x == bottomLeft.x && position.y == bottomLeft.y) {
+			bottomLeftPoint = true;
 		}
-		if(position.x == btmRight.x && position.y == btmRight.y) {
-			btmRightPoint = true;
+		if(position.x == bottomRight.x && position.y == bottomRight.y) {
+			bottomRightPoint = true;
 		}
 	} 
 
 
-	void upperLeft() {
-		//Move down
-		if(down && topLeftPoint) {
-			if(moveAnimation) {
-				position.y += speed * deltaTime;
+	void isUpperLeft() {
+		if (topLeftPoint) {
+			//Move down
+			if(down) {
+				if(moveAnimation) {
+					position.y += speed * deltaTime;
+				}
+
+				if(position.y >= bottomLeft.y) {
+					position.y = bottomLeft.y;
+
+					down = false;
+					topLeftPoint = false;
+					moveAnimation = false;
+				}
 			}
-			if(position.y >= btmLeft.y) {
-				position.y = btmLeft.y;
-				down = false;
+
+			//Move right
+			if(right) {
+				if(moveAnimation) {
+					position.x += speed * deltaTime;
+				}
+
+				if(position.x >= bottomRight.x) {
+					position.x = bottomRight.x;
+
+					right = false;
+					topLeftPoint = false;
+					moveAnimation = false;
+				}
+			}
+
+			if(left) {
+				left = false;
+				topLeftPoint = false;
+				moveAnimation = false;
+			}
+			if(up) {
+				up = false;
 				topLeftPoint = false;
 				moveAnimation = false;
 			}
 		}
-		//Move to the right
-		if(right && topLeftPoint) {
-			if(moveAnimation) {
-				position.x += speed * deltaTime;
+	}
+
+
+	void isUpperRight() {
+		if (topRightPoint) {
+			//Move down
+			if(down) {
+				if(moveAnimation) {
+					position.y += speed * deltaTime;
+				}
+				if(position.y >= bottomRight.y) {
+					position.y = bottomRight.y;
+
+					down = false;
+					topRightPoint = false;
+					moveAnimation = false;
+				}
 			}
-			if(position.x >= btmRight.x) {
-				position.x = btmRight.x;
+
+			//Move left
+			if(left) {
+				if(moveAnimation) {
+					position.x -= speed * deltaTime;
+				}
+				if(position.x <= topLeft.x) {
+					position.x = topLeft.x;
+
+					left = false;
+					topRightPoint = false;
+					moveAnimation = false;
+				}
+			}
+			
+			if(right) {
 				right = false;
-				topLeftPoint = false;
+				topRightPoint = false;
+				moveAnimation = false;
+			}
+			if(up) {
+				up = false;
+				topRightPoint = false;
 				moveAnimation = false;
 			}
 		}
-		//Do nothing
-		if(left && topLeftPoint) {
-			left = false;
-			topLeftPoint = false;
-			moveAnimation = false;
-		}
-		if(up && topLeftPoint) {
-			up = false;
-			topLeftPoint = false;
-			moveAnimation = false;
-		}
 	}
 
-	void upperRight() {
-		//Move down
-		if(down && topRightPoint) {
-			if(moveAnimation) {
-				position.y += speed * deltaTime;
+
+	void isLowerLeft() {
+		if (bottomLeftPoint) {
+			//Move up
+			if(up) {
+				if(moveAnimation) {
+					position.y -= speed * deltaTime;
+				}
+				if(position.y <= topLeft.y) {
+					position.y = topLeft.y;
+
+					up = false;
+					bottomLeftPoint = false;
+					moveAnimation = false;
+				}
 			}
-			if(position.y >= btmRight.y) {
-				position.y = btmRight.y;
+
+			//Move right
+			if(right) {
+				if(moveAnimation) {
+					position.x += speed * deltaTime;
+				}
+				if(position.x >= bottomRight.x) {
+					position.x = bottomRight.x;
+
+					right = false;
+					bottomLeftPoint = false;
+					moveAnimation = false;
+				}
+			}
+			
+			if(left) {
+				left = false;
+				bottomLeftPoint = false;
+				moveAnimation = false;
+			}
+			if(down) {
 				down = false;
-				topRightPoint = false;
+				bottomLeftPoint = false;
 				moveAnimation = false;
 			}
-		}
-		//Move to the left
-		if(left && topRightPoint) {
-			if(moveAnimation) {
-				position.x -= speed * deltaTime;
-			}
-			if(position.x <= topLeft.x) {
-				position.x = topLeft.x;
-				left = false;
-				topRightPoint = false;
-				moveAnimation = false;
-			}
-		}
-		//Do nothing
-		if(right && topRightPoint) {
-			right = false;
-			topRightPoint = false;
-			moveAnimation = false;
-		}
-		if(up && topRightPoint) {
-			up = false;
-			topRightPoint = false;
-			moveAnimation = false;
 		}
 	}
 
-	void lowerLeft() {
-		//Move up
-		if(up && btmLeftPoint) {
-			if(moveAnimation) {
-				position.y -= speed * deltaTime;
+
+	void isLowerRight() {
+		if (bottomRightPoint) {
+			//Move up
+			if(up) {
+				if(moveAnimation) {
+					position.y -= speed * deltaTime;
+				}
+				if(position.y <= topRight.y) {
+					position.y = topRight.y;
+
+					up = false;
+					bottomRightPoint = false;
+					moveAnimation = false;
+				}
 			}
-			if(position.y <= topLeft.y) {
-				position.y = topLeft.y;
-				up = false;
-				btmLeftPoint = false;
-				moveAnimation = false;
+
+			//Move left
+			if(left) {
+				if(moveAnimation) {
+					position.x -= speed * deltaTime;
+				}
+				if(position.x <= bottomLeft.x) {
+					position.x = bottomLeft.x;
+
+					left = false;
+					bottomRightPoint = false;
+					moveAnimation = false;
+				}
 			}
-		} 
-		//Move to the right
-		if(right && btmLeftPoint) {
-			if(moveAnimation) {
-				position.x += speed * deltaTime;
-			}
-			if(position.x >= btmRight.x) {
-				position.x = btmRight.x;
+			
+			if(right) {
 				right = false;
-				btmLeftPoint = false;
+				bottomRightPoint = false;
 				moveAnimation = false;
 			}
-		}
-		//Do nothing
-		if(left && btmLeftPoint) {
-			left = false;
-			btmLeftPoint = false;
-			moveAnimation = false;
-		}
-		if(down && btmLeftPoint) {
-			down = false;
-			btmLeftPoint = false;
-			moveAnimation = false;
-		}
-	}
-
-	void lowerRight() {
-		//Move up
-		if(up && btmRightPoint) {
-			if(moveAnimation) {
-				position.y -= speed * deltaTime;
-			}
-			if(position.y <= topRight.y) {
-				position.y = topRight.y;
-				up = false;
-				btmRightPoint = false;
+			if(down) {
+				down = false;
+				bottomRightPoint = false;
 				moveAnimation = false;
 			}
-		}
-		//Move to the left
-		if(left && btmRightPoint) {
-			if(moveAnimation) {
-				position.x -= speed * deltaTime;
-			}
-			if(position.x <= btmLeft.x) {
-				position.x = btmLeft.x;
-				left = false;
-				btmRightPoint = false;
-				moveAnimation = false;
-			}
-		}
-		//do Nothing
-		if(right && btmRightPoint) {
-			right = false;
-			btmRightPoint = false;
-			moveAnimation = false;
-		}
-		if(down && btmRightPoint) {
-			down = false;
-			btmRightPoint = false;
-			moveAnimation = false;
 		}
 	}
 }

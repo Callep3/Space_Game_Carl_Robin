@@ -1,16 +1,16 @@
 PlayerBullet[] playerBullets;
 int playerBulletSize = 10;
+
 float playerBulletSpawnCd = 350; //1000 == 1 second
 float playerBulletTime = 500;
 
 class PlayerBullet {
 	PVector position, direction, velocity, mousePosition;
-	int playerBulletVelocity = 500;
+	int playerBulletSpeed = 500;
 	int size = playerBulletSize;
 	boolean isRendered = true;
 	boolean xBounce = true;
 	boolean yBounce = true;
-	boolean shieldBounce = true;
 
 
 	PlayerBullet(float x, float y) {
@@ -25,51 +25,41 @@ class PlayerBullet {
 		direction.x = ((mousePosition.x - position.x));	
 		direction.y = ((mousePosition.y - position.y));
 		direction.normalize();
-		velocity = direction.mult(playerBulletVelocity).mult(deltaTime);
+
+		velocity = direction.mult(playerBulletSpeed).mult(deltaTime);
 	}
 
 
 	void update() {
 		position.add(velocity);
-		offScreenDeactivation();
-		borderBounce();
-		Collision();
 	}
 
 
 	void draw() {
-		ellipseMode(CENTER);
 		fill(20, 230, 151);
+		ellipseMode(CENTER);
 		ellipse(position.x, position.y, size, size);
 	}
 
 
-	void offScreenDeactivation() {
-		for(int i = 0; i < playerBullets.length; i++) {
-			if (playerBullets[i].position.x < 0 || playerBullets[i].position.x > width || playerBullets[i].position.y < 0 || playerBullets[i].position.y > height) {
-				playerBullets[i].isRendered = false;
-			}
+	void offScreenDeactivation(int i) {
+		if (playerBullets[i].position.x < 0 || playerBullets[i].position.x > width) {
+			playerBullets[i].isRendered = false;
+		}
+		if (playerBullets[i].position.y < 0 || playerBullets[i].position.y > height) {
+			playerBullets[i].isRendered = false;
 		}
 	}
 
-	void borderBounce() {
-		for (int i = 0; i < playerBullets.length; ++i) {
-			if (playerBullets[i].position.x >= width/2 - size && playerBullets[i].position.x <= width/2 + size && playerBullets[i].xBounce == true) {
-				playerBullets[i].direction.x *= -1;
-				playerBullets[i].xBounce = false;
-			}
-			if (playerBullets[i].position.y >= height/2 - size && playerBullets[i].position.y <= height/2 + size && playerBullets[i].yBounce == true) {
-				playerBullets[i].direction.y *= -1;
-				playerBullets[i].yBounce = false;
-			}
-		}
-	}
 
-	void Collision() {
-		for (int i = 0; i < playerBullets.length; ++i) {
-			if (collision.playerBulletNexusCollision(playerBullets[i], nexus) && playerBullets[i].isRendered) {
-				playerBullets[i].isRendered = false;
-			}
+	void borderBounce(int i) {
+		if (playerBullets[i].position.x >= width/2 - size && playerBullets[i].position.x <= width/2 + size && playerBullets[i].xBounce == true) {
+			playerBullets[i].direction.x *= -1;
+			playerBullets[i].xBounce = false;
+		}
+		if (playerBullets[i].position.y >= height/2 - size && playerBullets[i].position.y <= height/2 + size && playerBullets[i].yBounce == true) {
+			playerBullets[i].direction.y *= -1;
+			playerBullets[i].yBounce = false;
 		}
 	}
 }

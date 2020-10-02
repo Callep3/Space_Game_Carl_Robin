@@ -24,8 +24,8 @@ public class Shields {
 				case 0:
 					if (topLftShield > 0) {
 						for (int i = 0; i < enemies.length; ++i) {
-							if (collision.enemyShieldsCollision(enemies[i], lftShieldPoint, middleShieldPointHeight, middleShieldPointWidth, topShieldPoint) && enemies[i].alive) {
-								enemies[i].alive = false;
+							if (collision.enemyShieldsCollision(enemies[i], lftShieldPoint, middleShieldPointHeight, middleShieldPointWidth, topShieldPoint) && enemies[i].isRendered) {
+								enemies[i].isRendered = false;
 								topLftShield -= 1;
 							}
 						}
@@ -53,7 +53,7 @@ public class Shields {
 									float dot = incidence.dot(normal);
 
 									playerBullets[i].velocity.set(2*normal.x*dot - incidence.x, 2*normal.y*dot - incidence.y, 0);
-									playerBullets[i].velocity.mult(playerBullets[i].playerBulletVelocity).mult(deltaTime);
+									playerBullets[i].velocity.mult(playerBullets[i].playerBulletSpeed).mult(deltaTime);
 
 									playerBullets[i].xBounce = false;
 									playerBullets[i].yBounce = false;
@@ -65,8 +65,8 @@ public class Shields {
 				case 1:
 					if (topRgtShield > 0) {
 						for (int i = 0; i < enemies.length; ++i) {
-							if (collision.enemyShieldsCollision(enemies[i], middleShieldPointWidth, topShieldPoint, rgtShieldPoint, middleShieldPointHeight) && enemies[i].alive) {
-								enemies[i].alive = false;
+							if (collision.enemyShieldsCollision(enemies[i], middleShieldPointWidth, topShieldPoint, rgtShieldPoint, middleShieldPointHeight) && enemies[i].isRendered) {
+								enemies[i].isRendered = false;
 								topRgtShield -= 1;
 							}
 						}
@@ -94,7 +94,7 @@ public class Shields {
 									float dot = incidence.dot(normal);
 
 									playerBullets[i].velocity.set(2*normal.x*dot - incidence.x, 2*normal.y*dot - incidence.y, 0);
-									playerBullets[i].velocity.mult(playerBullets[i].playerBulletVelocity).mult(deltaTime);
+									playerBullets[i].velocity.mult(playerBullets[i].playerBulletSpeed).mult(deltaTime);
 
 									playerBullets[i].xBounce = false;
 									playerBullets[i].yBounce = false;
@@ -106,8 +106,8 @@ public class Shields {
 				case 2:
 					if (btmLftShield > 0) {
 						for (int i = 0; i < enemies.length; ++i) {
-							if (collision.enemyShieldsCollision(enemies[i], middleShieldPointWidth, btmShieldPoint, lftShieldPoint, middleShieldPointHeight) && enemies[i].alive) {
-								enemies[i].alive = false;
+							if (collision.enemyShieldsCollision(enemies[i], middleShieldPointWidth, btmShieldPoint, lftShieldPoint, middleShieldPointHeight) && enemies[i].isRendered) {
+								enemies[i].isRendered = false;
 								btmLftShield -= 1;
 							}
 						}
@@ -135,7 +135,7 @@ public class Shields {
 									float dot = incidence.dot(normal);
 
 									playerBullets[i].velocity.set(2*normal.x*dot - incidence.x, 2*normal.y*dot - incidence.y, 0);
-									playerBullets[i].velocity.mult(playerBullets[i].playerBulletVelocity).mult(deltaTime);
+									playerBullets[i].velocity.mult(playerBullets[i].playerBulletSpeed).mult(deltaTime);
 
 									playerBullets[i].xBounce = false;
 									playerBullets[i].yBounce = false;
@@ -147,8 +147,8 @@ public class Shields {
 				case 3:
 					if (btmRgtShield > 0) {
 						for (int i = 0; i < enemies.length; ++i) {
-							if (collision.enemyShieldsCollision(enemies[i], rgtShieldPoint, middleShieldPointHeight, middleShieldPointWidth, btmShieldPoint) && enemies[i].alive) {
-								enemies[i].alive = false;
+							if (collision.enemyShieldsCollision(enemies[i], rgtShieldPoint, middleShieldPointHeight, middleShieldPointWidth, btmShieldPoint) && enemies[i].isRendered) {
+								enemies[i].isRendered = false;
 								btmRgtShield -= 1;
 							}
 						}
@@ -176,7 +176,7 @@ public class Shields {
 									float dot = incidence.dot(normal);
 
 									playerBullets[i].velocity.set(2*normal.x*dot - incidence.x, 2*normal.y*dot - incidence.y, 0);
-									playerBullets[i].velocity.mult(playerBullets[i].playerBulletVelocity).mult(deltaTime);
+									playerBullets[i].velocity.mult(playerBullets[i].playerBulletSpeed).mult(deltaTime);
 
 									playerBullets[i].xBounce = false;
 									playerBullets[i].yBounce = false;

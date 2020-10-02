@@ -22,7 +22,7 @@ void setup() {
 	shields = new Shields();
 	userInterface = new UserInterface();
 
-	enemies = new Enemies[0];
+	enemies = new Enemy[0];
 	playerBullets = new PlayerBullet[0];
 	enemyBullets = new EnemyBullet[0];
 	player = new Player(width / 4, height / 4);
@@ -34,14 +34,18 @@ void setup() {
 
 void draw() {
 	if(startGame && nexusHealth > 0) {
-		myTime.DeltaTime();
+		myTime.deltaTime();
 
 		world.worldCreation();
+		nexus.draw();
 
 		for(int i = 0; i < playerBullets.length; i++) {
 			if (playerBullets[i].isRendered) {
 				playerBullets[i].update();
 				playerBullets[i].draw();
+				playerBullets[i].offScreenDeactivation(i);
+				playerBullets[i].borderBounce(i);
+				nexus.playerBulletCollision(i);
 			}
 		}
 
@@ -49,14 +53,15 @@ void draw() {
 			if(enemyBullets[i].isRendered) {
 				enemyBullets[i].update();
 				enemyBullets[i].draw();
-				nexus.collision(i);
+				nexus.enemyBulletCollision(i);
 			}
 		}
 
 		for (int i = 0; i < enemies.length; ++i) {
-			if (enemies[i].alive) {
+			if (enemies[i].isRendered) {
 				enemies[i].update();
 				enemies[i].draw();
+				nexus.enemyCollision(i);
 			}
 		}
 
@@ -73,7 +78,7 @@ void draw() {
 	}
 
 	if (nexusHealth <= 0) {
-			userInterface.gameOverScreen();
-		}
+		userInterface.gameOverScreen();
+	}
 	
 }
