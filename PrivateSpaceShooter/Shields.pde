@@ -1,7 +1,7 @@
 //Author: Carl
 
 int topLeftShieldHp, topRightShieldHp, bottomLeftShieldHp, bottomRightShieldHp;
-int shieldMaxHealth = 1;
+int shieldMaxHealth = 50;
 
 public class Shields {
 	float leftShieldPoint = width/2-150;

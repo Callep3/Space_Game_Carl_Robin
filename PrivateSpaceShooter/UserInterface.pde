@@ -19,6 +19,7 @@ class UserInterface {
 		textAlign(LEFT);
 		textSize(40);
 		text("Score: " + score, 30, 60);
+		crosshair();
 	}
 
 
@@ -60,7 +61,7 @@ class UserInterface {
 			image(nexusImage, width/2 - 75, height/2 - 75);
 
 			//NexusHealth
-			fill(255, 169, 140);
+			fill(210, 255, 210);
 			textAlign(CENTER);
 			textSize(50);
 			text(nexusHealth, width/2, height/2 + 15);
@@ -86,6 +87,7 @@ class UserInterface {
 		text("You got a score of " + score + " and survived for " + timeAlive + " seconds!", width/2, height/2.5);
 		highScore();
 	}
+
 
 	void highScore() {
 		//If no highscore then highscore is 0
@@ -121,5 +123,10 @@ class UserInterface {
 				text("You got a new high score!", width/2, height/1.5);
 			}
 		}
+	}
+
+
+	void crosshair() {
+		cursor(CROSS);
 	}
 }

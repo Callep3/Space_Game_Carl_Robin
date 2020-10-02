@@ -13,7 +13,7 @@ class Nexus {
 		image(nexusImage, width/2 - 75, height/2 - 75);
 
 		//NexusHealth
-		fill(255, 169, 140);
+		fill(210, 255, 210);
 		textAlign(CENTER);
 		textSize(50);
 		text(nexusHealth, width/2, height/2 + 15);
