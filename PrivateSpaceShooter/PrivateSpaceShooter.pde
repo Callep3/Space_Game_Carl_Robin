@@ -80,5 +80,4 @@ void draw() {
 	if (nexusHealth <= 0) {
 		userInterface.gameOverScreen();
 	}
-	
 }

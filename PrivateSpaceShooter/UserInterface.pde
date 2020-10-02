@@ -4,6 +4,7 @@ boolean startGame;
 
 class UserInterface {
 	boolean blackenBackground;
+	boolean lastNexusHealthUpdate;
 
 	
 	void update() {
@@ -50,64 +51,73 @@ class UserInterface {
 		}
 	}
 
+
 	void gameOverScreen() {
+		if (lastNexusHealthUpdate == false) {
 			//Nexus
-			fill(0, 200, 151);
-			ellipseMode(CENTER);
-			ellipse(width/2, height/2, nexusSize, nexusSize);
-			image(nexusImage, width/2-75, height/2-75);
+			image(nexusImage, width/2 - 75, height/2 - 75);
+
 			//NexusHealth
-			fill(255);
+			fill(255, 169, 140);
 			textAlign(CENTER);
 			textSize(50);
 			text(nexusHealth, width/2, height/2 + 15);
-			//Game Over Text
 
-			if(blackenBackground == false) {
-				fill(0, 130);
-				rect(0, 0, width*2, height*2);
-				blackenBackground = true;
-			}
-			stroke(0);
-			strokeWeight(3);
-			textAlign(CENTER);
-			fill(255);
-			textSize(100);
-			text("Game Over!", width/2, height/3);
-			textSize(36);
-			text("You got a score of " + score + " and survived for " + timeAlive + " seconds!", width/2, height/2.5);
-      highScore();
+			lastNexusHealthUpdate = true;
+		}
+
+		if(blackenBackground == false) {
+			fill(0, 130);
+			rect(0, 0, width*2, height*2);
+
+			blackenBackground = true;
+		}
+
+		//Game over text
+		stroke(0);
+		strokeWeight(3);
+		fill(255);
+		textAlign(CENTER);
+		textSize(100);
+		text("Game Over!", width/2, height/3);
+		textSize(36);
+		text("You got a score of " + score + " and survived for " + timeAlive + " seconds!", width/2, height/2.5);
+		highScore();
 	}
 
-  void highScore() {
-    
-    File file = new File("data/highScore.txt");
-    if(file.length() == 0) {
-        String newHighScore = str(0);
-        String[] highScore = split(newHighScore, ' ');
-        saveStrings("data/highScore.txt", highScore);
-    }
-    
-    String[] currentHighScore = loadStrings("data/highScore.txt");
-    if(currentHighScore != null) {
-      int HighScore = 0;
-      
-      for(int i = 0; i < currentHighScore.length; i++) {
-         HighScore = Integer.parseInt(currentHighScore[i]);
-      }
-      
-      if(HighScore > score) {
-        textSize(48);
-        text("High score: " + HighScore, width/2, height/1.5);
-      }
-      
-      if(score > HighScore) {
-        String newHighScore = str(score);
-        String[] highScore = split(newHighScore, ' ');
-        saveStrings("data/highScore.txt", highScore);
-        textSize(48);
-        text("You got a new high score!", width/2, height/1.5);
-      }
-    }
-  }
+	void highScore() {
+		//If no highscore then highscore is 0
+		File file = new File("data/highScore.txt");
+		if(file.length() == 0) {
+			String newHighScore = str(0);
+			String[] highScore = split(newHighScore, ' ');
+			saveStrings("data/highScore.txt", highScore);
+		}
+
+		//Get previous highscore
+		String[] currentHighScore = loadStrings("data/highScore.txt");
+
+		//If new score is greater than previous highscore then that becomes the new highscore
+		if(currentHighScore != null) {
+			int HighScore = 0;
+
+			for(int i = 0; i < currentHighScore.length; i++) {
+				HighScore = Integer.parseInt(currentHighScore[i]);
+			}
+
+			if(HighScore > score) {
+				textSize(48);
+				text("High score: " + HighScore, width/2, height/1.5);
+			}
+
+			if(score > HighScore) {
+				String newHighScore = str(score);
+				String[] highScore = split(newHighScore, ' ');
+				saveStrings("data/highScore.txt", highScore);
+				
+				textSize(48);
+				text("You got a new high score!", width/2, height/1.5);
+			}
+		}
+	}
 }
