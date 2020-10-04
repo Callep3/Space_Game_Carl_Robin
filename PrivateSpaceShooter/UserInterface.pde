@@ -47,7 +47,7 @@ class UserInterface {
 			fill(255);
 			textAlign(CENTER);
 			textSize(100);
-			text("Example Text", width/2, height/3);
+			text("Nexus Defender", width/2, height/3);
 
 			textSize(36);
 			text("Press 'G' when you are ready to start the game.", width/2, height/2.5);
