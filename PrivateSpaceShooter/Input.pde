@@ -22,8 +22,10 @@ void keyPressed() {
 		}
 	}
 	if(key == 'g' || key == 'G') {
-		startGame = true;
-		time = 0;
+		if(!startGame) {
+			time = 0;
+			startGame = true;
+		}
 	}
 }
 
